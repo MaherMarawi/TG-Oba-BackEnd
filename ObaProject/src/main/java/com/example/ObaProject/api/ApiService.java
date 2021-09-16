@@ -13,14 +13,14 @@ public class ApiService {
     private final QueryArrange queryArrange;
     private final ResConfig resConfig;
     private final FacetConfig facetConfig;
-    private final Request request;
+    private final GetRequest request;
 
     @Autowired
     public ApiService(ApiConfig apiConfig,
                       QueryArrange queryArrange,
                       ResConfig resConfig,
                       FacetConfig facetConfig,
-                      Request request) {
+                      GetRequest request) {
         this.apiConfig = apiConfig;
         this.queryArrange = queryArrange;
         this.resConfig = resConfig;

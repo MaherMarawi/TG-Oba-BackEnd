@@ -15,7 +15,7 @@ public class ResConfig {
 
     public List<Res> resultsToJson(NodeList list) {
         List<Res> results = new ArrayList<>();
-        for (var itr = 0; itr < list.getLength(); itr++)
+        for (int itr = 0; itr < list.getLength(); itr++)
         {
             Node node = list.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE)

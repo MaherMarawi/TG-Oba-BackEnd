@@ -13,7 +13,7 @@ public class FacetConfig {
     public Facet resultsToJson(NodeList list) {
         List<FacetItem> facetItemList = new ArrayList<>();
         Facet facet = new Facet();
-        for (var itr = 0; itr < list.getLength(); itr++)
+        for (int itr = 0; itr < list.getLength(); itr++)
         {
             Node node = list.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE)
