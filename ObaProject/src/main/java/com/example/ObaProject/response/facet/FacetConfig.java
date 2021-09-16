@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,6 @@ public class FacetConfig {
             Node node = list.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
-                Element eElement = (Element) node;
                 NodeList n = ((Element) node).getElementsByTagName("value");
                 for (int i = 0; i < n.getLength(); i++) {
                     Element e = (Element) n.item(i);
