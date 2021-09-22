@@ -169,9 +169,10 @@ public class Res {
     }
 
     public static String[] getArray(String str) {
-        str.replaceAll("\n", ",");
+
+        String strReplace = str.replaceAll("\n", ",");
         ArrayList strResult = new ArrayList();
-        for (String w : str.split("\n")) {
+        for (String w : strReplace.split(",")) {
             if (w.trim() != "")
                 strResult.add(w.trim());
         }
