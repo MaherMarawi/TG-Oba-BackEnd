@@ -170,7 +170,7 @@ public class Res {
 
     public static String[] getArray(String str) {
 
-        String strReplace = str.replaceAll("\n", ",");
+        String strReplace = str.trim().replaceAll("\n", ",");
         ArrayList strResult = new ArrayList();
         for (String w : strReplace.split(",")) {
             if (w.trim() != "")
