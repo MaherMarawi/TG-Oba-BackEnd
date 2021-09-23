@@ -2,6 +2,7 @@ package com.example.ObaProject;
 
 import com.example.ObaProject.api.ApiService;
 import com.example.ObaProject.response.Response;
+import jdk.javadoc.internal.doclets.formats.html.markup.HtmlAttr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,11 @@ public class Controller {
 
     @Autowired
     ApiService service;
+
+    @GetMapping()
+    public String home() {
+        return "This application has no explicit mapping for /, so you are seeing this as a WelkomstBericht";
+    }
 
     @GetMapping("/search/{search_value}")
     public Response search(@PathVariable String search_value) {
