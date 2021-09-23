@@ -6,6 +6,9 @@ import com.example.ObaProject.response.result.ResConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @org.springframework.stereotype.Service
 public class ApiService {
 
@@ -30,18 +33,58 @@ public class ApiService {
 
     public Response search(String search_value) {
 
-        String extra = "&facet=language(eng)&facet=type(dvdvideo)";
-
+//        String extra = "&facet=language(eng)&facet=type(dvdvideo)";
         StringBuilder query = queryArrange.getQuery(search_value);
-
         String url = apiConfig.getUrl() +
-                        query + "&authorization=" +
-                            apiConfig.getPublicKey() +
-                                "&refine=true";
-
+                     query +
+                     "&authorization=" +
+                     apiConfig.getPublicKey() +
+                     "&refine=true";
         Document doc = request.sendRequest(url);
-
         return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
                             facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
     }
+
+    public List<String> categorieen() {
+        String url = apiConfig.getCategorieen() +
+                "authorization=" +
+                apiConfig.getPublicKey();
+        Document doc = request.sendRequest(url);
+        NodeList results = doc.getElementsByTagName("result");
+        List<String> res = new ArrayList<>();
+        for (int i = 0; i < results.getLength(); i++) {
+            res.add(results.item(i).getTextContent());
+        }
+        return res;
+    }
+
+    public Response categorie(String categorie_name) {
+        String url = apiConfig.getUrl() +
+                    "classification:" +
+                    categorie_name +
+                    "&authorization=" +
+                    apiConfig.getPublicKey();
+        Document doc = request.sendRequest(url);
+        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
+                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+    }
+
+    public Response categorieSearch(String categorie_name, String search_value) {
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                    "classification:" +
+                    categorie_name +
+                    "%20" +
+                    query +
+                    "&authorization=" +
+                    apiConfig.getPublicKey();
+        Document doc = request.sendRequest(url);
+        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
+                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+    }
+//        private static Response response(String url) {
+//            Document doc = request.sendRequest(url);
+//            return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
+//                    facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+//    }
 }

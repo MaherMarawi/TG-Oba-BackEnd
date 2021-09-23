@@ -11,9 +11,20 @@ public class ApiConfig {
     private String url ;
     private String publicKey;
     private String secretKey;
+    private String categorieen;
 
     public ApiConfig() {
     }
+
+    public String getCategorieen() {
+        return categorieen;
+    }
+
+    public void setCategorieen(String categorieen) {
+        this.categorieen = categorieen;
+    }
+
+
 
     public String getUrl() {
         return url;

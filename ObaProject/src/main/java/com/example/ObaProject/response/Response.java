@@ -1,5 +1,6 @@
 package com.example.ObaProject.response;
 
+import com.example.ObaProject.response.categorieen.Categorie;
 import com.example.ObaProject.response.facet.Facet;
 import com.example.ObaProject.response.result.Res;
 
@@ -7,8 +8,13 @@ import java.util.List;
 
 public class Response {
 
+
     private List<Res> results;
     private Facet facet;
+
+    public Response() {
+
+    }
 
     public Response(List<Res> results, Facet facet) {
         this.results = results;
