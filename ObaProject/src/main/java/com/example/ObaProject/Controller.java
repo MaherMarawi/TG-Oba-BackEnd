@@ -29,14 +29,14 @@ public class Controller {
         return service.categorieen();
     }
 
-    @GetMapping("/categorieen/{categorie_name}")
-    public Response categorie(@PathVariable String categorie_name) {
-        return service.categorie(categorie_name);
+    @GetMapping("/categorieen/{categorie_naam}")
+    public Response categorie(@PathVariable String categorie_naam) {
+        return service.categorie(categorie_naam);
     }
 
-    @GetMapping("/categorieen/{categorie_name}/{search_value}")
-    public Response categorieSearch(@PathVariable String categorie_name, @PathVariable String search_value) {
-        return service.categorieSearch(categorie_name, search_value);
+    @GetMapping("/categorieen/{categorie_naam}/{search_value}")
+    public Response categorieSearch(@PathVariable String categorie_naam, @PathVariable String search_value) {
+        return service.categorieSearch(categorie_naam, search_value);
     }
     // NOG NIET GEDAAN
     @GetMapping("/activiteiten")
@@ -44,8 +44,8 @@ public class Controller {
         return service.activiteit();
     }
 
-    @GetMapping("/activiteiten/{categorie_name}/{search_value}")
-    public Response activiteitSearch(@PathVariable String categorie_name, @PathVariable String search_value) {
-        return service.categorieSearch(categorie_name, search_value);
+    @GetMapping("/activiteiten/{wijk_naam}")
+    public Response activiteitSearch(@PathVariable String wijk_naam) {
+        return service.activiteitSearch(wijk_naam);
     }
 }

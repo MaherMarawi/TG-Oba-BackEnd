@@ -66,10 +66,10 @@ public class ApiService {
         return res;
     }
 
-    public Response categorie(String categorie_name) {
+    public Response categorie(String categorie_naam) {
         String url = apiConfig.getUrl() +
                     "classification:" +
-                    categorie_name +
+                    categorie_naam +
                     "&authorization=" +
                     apiConfig.getPublicKey();
         Document doc = request.sendRequest(url);
@@ -77,11 +77,11 @@ public class ApiService {
                 facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
     }
 
-    public Response categorieSearch(String categorie_name, String search_value) {
+    public Response categorieSearch(String categorie_naam, String search_value) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                     "classification:" +
-                    categorie_name +
+                    categorie_naam +
                     "%20" +
                     query +
                     "&authorization=" +
@@ -97,6 +97,19 @@ public class ApiService {
                     apiConfig.getPublicKey() +
                     "&refine=true" +
                     apiConfig.getSort();
+        Document doc = request.sendRequest(url);
+        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
+                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+    }
+
+    public Response activiteitSearch(String wijk_naam) {
+        String url = apiConfig.getActiviteiten() +
+                "&authorization=" +
+                apiConfig.getPublicKey() +
+                "&refine=true" +
+                apiConfig.getSort() +
+                "&branch=OBA%20" +
+                wijk_naam;
         Document doc = request.sendRequest(url);
         return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
                 facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
