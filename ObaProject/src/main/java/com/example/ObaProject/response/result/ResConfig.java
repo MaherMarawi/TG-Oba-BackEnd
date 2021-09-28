@@ -41,6 +41,10 @@ public class ResConfig {
                 res.setGenres(checkValue(eElement, "genres") ? eElement.getElementsByTagName("genres").item(0).getTextContent() : "");
                 res.setSummaries(checkValue(eElement, "summaries") ? eElement.getElementsByTagName("summaries").item(0).getTextContent() : "");
                 res.setClassification(checkValue(eElement, "classification") ? eElement.getElementsByTagName("classification").item(0).getTextContent() : "");
+                res.setYear(checkValue(eElement, "year") ? eElement.getElementsByTagName("year").item(0).getTextContent() : "");
+                res.setSubject_topical(checkValue(eElement, "subject-topical") ? eElement.getElementsByTagName("subject-topical").item(0).getTextContent() : "");
+                res.setEresources(checkValue(eElement, "eresources") ? eElement.getElementsByTagName("eresources").item(0).getTextContent() : "");
+                res.setCustom(checkValue(eElement, "custom") ? eElement.getElementsByTagName("custom").item(0).getTextContent() : "");
                 results.add(res);
             }
         }

@@ -25,6 +25,41 @@ public class Res {
     private String[] summaries;
     private String[] genres;
 
+    private String year;
+    private String[] subject_topical;
+    private String[] eresources;
+    private String[] custom;
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String[] getSubject_topical() {
+        return subject_topical;
+    }
+
+    public void setSubject_topical(String subject_topical) {
+        this.subject_topical = getArray(subject_topical);
+    }
+
+    public String[] getEresources() {
+        return eresources;
+    }
+
+    public void setEresources(String eresources) {
+        this.eresources = getArray(eresources);
+    }
+
+    public String[] getCustom() {
+        return custom;
+    }
+
+
+
     public Res() {
     }
     public void setDetail_page(String detail_page) {
@@ -83,6 +118,10 @@ public class Res {
     }
     public void setClassification(String classification) {
         this.classification = getArray(classification);
+    }
+
+    public void setCustom(String custom) {
+        this.custom = getArray(custom);
     }
 
     public String getDetail_page() {

@@ -1,6 +1,5 @@
 package com.example.ObaProject.response;
 
-import com.example.ObaProject.response.categorieen.Categorie;
 import com.example.ObaProject.response.facet.Facet;
 import com.example.ObaProject.response.result.Res;
 
