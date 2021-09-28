@@ -38,7 +38,7 @@ public class Controller {
     public Response categorieSearch(@PathVariable String categorie_naam, @PathVariable String search_value) {
         return service.categorieSearch(categorie_naam, search_value);
     }
-    // NOG NIET GEDAAN
+    // ACTIVITEITEN
     @GetMapping("/activiteiten")
     public Response activiteit() {
         return service.activiteit();
@@ -47,5 +47,10 @@ public class Controller {
     @GetMapping("/activiteiten/{wijk_naam}")
     public Response activiteitSearch(@PathVariable String wijk_naam) {
         return service.activiteitSearch(wijk_naam);
+    }
+    //CURSUSSEN
+    @GetMapping("/cursussen")
+    public Response cursussen() {
+        return service.cursussen();
     }
 }

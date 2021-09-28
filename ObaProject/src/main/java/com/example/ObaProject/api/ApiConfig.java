@@ -12,7 +12,7 @@ public class ApiConfig {
     private String publicKey;
     private String secretKey;
     private String categorieen;
-    private String activiteiten;
+//    private String activiteiten;
     private String sort;
 
     public ApiConfig() {
@@ -34,13 +34,13 @@ public class ApiConfig {
         this.categorieen = categorieen;
     }
 
-    public String getActiviteiten() {
-        return activiteiten;
-    }
+//    public String getActiviteiten() {
+//        return activiteiten;
+//    }
 
-    public void setActiviteiten(String activiteiten) {
-        this.activiteiten = activiteiten;
-    }
+//    public void setActiviteiten(String activiteiten) {
+//        this.activiteiten = activiteiten;
+//    }
 
     public String getUrl() {
         return url;
