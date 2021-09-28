@@ -12,8 +12,18 @@ public class ApiConfig {
     private String publicKey;
     private String secretKey;
     private String categorieen;
+    private String activiteiten;
+    private String sort;
 
     public ApiConfig() {
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
     public String getCategorieen() {
@@ -24,7 +34,13 @@ public class ApiConfig {
         this.categorieen = categorieen;
     }
 
+    public String getActiviteiten() {
+        return activiteiten;
+    }
 
+    public void setActiviteiten(String activiteiten) {
+        this.activiteiten = activiteiten;
+    }
 
     public String getUrl() {
         return url;

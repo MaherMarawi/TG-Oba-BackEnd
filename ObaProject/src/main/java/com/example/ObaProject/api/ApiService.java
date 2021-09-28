@@ -4,10 +4,18 @@ import com.example.ObaProject.response.facet.FacetConfig;
 import com.example.ObaProject.response.Response;
 import com.example.ObaProject.response.result.ResConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Encoding;
 import org.w3c.dom.*;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @org.springframework.stereotype.Service
 public class ApiService {
@@ -78,6 +86,17 @@ public class ApiService {
                     query +
                     "&authorization=" +
                     apiConfig.getPublicKey();
+        Document doc = request.sendRequest(url);
+        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
+                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+    }
+
+    public Response activiteit() {
+        String url = apiConfig.getActiviteiten() +
+                    "&authorization=" +
+                    apiConfig.getPublicKey() +
+                    "&refine=true" +
+                    apiConfig.getSort();
         Document doc = request.sendRequest(url);
         return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
                 facetConfig.resultsToJson(doc.getElementsByTagName("facet")));

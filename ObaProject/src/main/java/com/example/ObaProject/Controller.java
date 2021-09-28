@@ -38,4 +38,14 @@ public class Controller {
     public Response categorieSearch(@PathVariable String categorie_name, @PathVariable String search_value) {
         return service.categorieSearch(categorie_name, search_value);
     }
+    // NOG NIET GEDAAN
+    @GetMapping("/activiteiten")
+    public Response activiteit() {
+        return service.activiteit();
+    }
+
+    @GetMapping("/activiteiten/{categorie_name}/{search_value}")
+    public Response activiteitSearch(@PathVariable String categorie_name, @PathVariable String search_value) {
+        return service.categorieSearch(categorie_name, search_value);
+    }
 }

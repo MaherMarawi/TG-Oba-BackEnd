@@ -14,6 +14,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Date;
+
 import org.json.*;
 
 
@@ -92,6 +94,7 @@ public class GetRequest {
 
 
     private static Response send(String url) {
+        String g = "https://zoeken.oba.nl/api/v1/?i_public=1e19898c87464e239192c8bfe422f280&i_secret=4289fec4e962a33118340c888699438d#jwt";
             Request request = new Request.Builder()
                     .url(url)
                     .build();
@@ -105,4 +108,7 @@ public class GetRequest {
         return response;
 
     }
+
+
+
 }
