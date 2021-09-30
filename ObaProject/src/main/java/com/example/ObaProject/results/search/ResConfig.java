@@ -1,4 +1,4 @@
-package com.example.ObaProject.response.result;
+package com.example.ObaProject.results.search;
 
 import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;

@@ -1,4 +1,4 @@
-package com.example.ObaProject.response.facet;
+package com.example.ObaProject.results.facet;
 
 import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;

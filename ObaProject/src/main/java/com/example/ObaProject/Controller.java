@@ -2,6 +2,9 @@ package com.example.ObaProject;
 
 import com.example.ObaProject.api.ApiService;
 import com.example.ObaProject.response.Response;
+import com.example.ObaProject.response.ResponseEvents;
+import com.example.ObaProject.results.cursussen.Cursus;
+import com.example.ObaProject.results.evenementen.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +21,15 @@ public class Controller {
     public String home() {
         return "This application has no explicit mapping for /, so you are seeing this as a WelkomstBericht";
     }
+    // SEARCH
+    // boek-Mark
 
     @GetMapping("/search/{search_value}")
     public Response search(@PathVariable String search_value) {
         return service.search(search_value);
     }
+
+    // CATEGORIEEN
 
     @GetMapping("/categorieen")
     public List<String> categorieen() {
@@ -39,18 +46,20 @@ public class Controller {
         return service.categorieSearch(categorie_naam, search_value);
     }
     // ACTIVITEITEN
+
     @GetMapping("/activiteiten")
-    public Response activiteit() {
-        return service.activiteit();
+    public List<Event> activiteiten() {
+        return service.activiteiten();
     }
 
     @GetMapping("/activiteiten/{wijk_naam}")
-    public Response activiteitSearch(@PathVariable String wijk_naam) {
-        return service.activiteitSearch(wijk_naam);
+    public Response activiteitenSearch(@PathVariable String wijk_naam) {
+        return service.activiteitenSearch(wijk_naam);
     }
-    //CURSUSSEN
+    // CURSUSSEN
+
     @GetMapping("/cursussen")
-    public Response cursussen() {
+    public List<Cursus> cursussen() {
         return service.cursussen();
     }
 }

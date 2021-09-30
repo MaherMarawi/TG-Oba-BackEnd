@@ -1,31 +1,32 @@
 package com.example.ObaProject.response;
 
+import com.example.ObaProject.results.evenementen.Event;
 import com.example.ObaProject.results.facet.Facet;
 import com.example.ObaProject.results.search.Res;
 
 import java.util.List;
 
-public class Response {
+public class ResponseEvents {
 
 
-    private List<Res> results;
+    private List<Event> events;
     private Facet facet;
 
-    public Response() {
+    public ResponseEvents() {
 
     }
 
-    public Response(List<Res> results, Facet facet) {
-        this.results = results;
+    public ResponseEvents(List<Event> events, Facet facet) {
+        this.events = events;
         this.facet = facet;
     }
 
-    public List<Res> getResults() {
-        return results;
+    public List<Event> getResults() {
+        return events;
     }
 
     public void setResults(List<Res> results) {
-        this.results = results;
+        this.events = events;
     }
 
     public Facet getFacet() {

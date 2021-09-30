@@ -1,8 +1,12 @@
 package com.example.ObaProject.api;
 
-import com.example.ObaProject.response.facet.FacetConfig;
+import com.example.ObaProject.results.cursussen.Cursus;
+import com.example.ObaProject.results.cursussen.CursusConfig;
+import com.example.ObaProject.results.evenementen.Event;
+import com.example.ObaProject.results.evenementen.EventConfig;
+import com.example.ObaProject.results.facet.FacetConfig;
 import com.example.ObaProject.response.Response;
-import com.example.ObaProject.response.result.ResConfig;
+import com.example.ObaProject.results.search.ResConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.*;
 import java.util.ArrayList;
@@ -16,18 +20,24 @@ public class ApiService {
     private final ResConfig resConfig;
     private final FacetConfig facetConfig;
     private final GetRequest request;
+    private final EventConfig eventConfig;
+    private final CursusConfig cursusConfig;
 
     @Autowired
     public ApiService(ApiConfig apiConfig,
                       QueryArrange queryArrange,
                       ResConfig resConfig,
                       FacetConfig facetConfig,
+                      EventConfig eventConfig,
+                      CursusConfig cursusConfig,
                       GetRequest request) {
         this.apiConfig = apiConfig;
         this.queryArrange = queryArrange;
         this.resConfig = resConfig;
         this.facetConfig = facetConfig;
         this.request = request;
+        this.eventConfig = eventConfig;
+        this.cursusConfig = cursusConfig;
     }
 
     public Response search(String search_value) {
@@ -82,7 +92,7 @@ public class ApiService {
                 facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
     }
 
-    public Response activiteit() {
+    public List<Event> activiteiten() {
         String url = apiConfig.getUrl() +
                     "table:activiteiten" +
                     "&authorization=" +
@@ -90,11 +100,10 @@ public class ApiService {
                     "&refine=true" +
                     apiConfig.getSort();
         Document doc = request.sendRequest(url);
-        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
-                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return eventConfig.resultsToJson(doc.getElementsByTagName("result"));
     }
 
-    public Response activiteitSearch(String wijk_naam) {
+    public Response activiteitenSearch(String wijk_naam) {
         String url = apiConfig.getUrl() +
                 "table:activiteiten" +
                 "&authorization=" +
@@ -108,7 +117,7 @@ public class ApiService {
                 facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
     }
 
-    public Response cursussen() {
+    public List<Cursus> cursussen() {
         String url = apiConfig.getUrl() +
                 "table:jsonsrc" +
                 "&authorization=" +
@@ -116,8 +125,7 @@ public class ApiService {
                 "&refine=true" +
                 apiConfig.getSort();
         Document doc = request.sendRequest(url);
-        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
-                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return cursusConfig.resultsToJson(doc.getElementsByTagName("result"));
     }
 //        private static Response response(String url) {
 //            Document doc = request.sendRequest(url);
