@@ -1,11 +1,11 @@
 package com.example.ObaProject.results.facet;
 
 public class FacetItem {
-    private String Count;
+    private String count;
     private String id;
 
     public FacetItem(String count, String id) {
-        Count = count;
+        this.count = count;
         this.id = id;
     }
 
@@ -13,11 +13,11 @@ public class FacetItem {
     }
 
     public String getCount() {
-        return Count;
+        return count;
     }
 
     public void setCount(String count) {
-        Count = count;
+        this.count = count;
     }
 
     public String getId() {

@@ -1,12 +1,15 @@
 package com.example.ObaProject.api;
 
 import com.example.ObaProject.results.ResultConfig;
+import com.example.ObaProject.results.activiteiten.ActiviteitResponse;
 import com.example.ObaProject.results.boeken.Boek;
 import com.example.ObaProject.results.boeken.BoekConfig;
+import com.example.ObaProject.results.boeken.BoekResponse;
 import com.example.ObaProject.results.cursussen.Cursus;
 import com.example.ObaProject.results.cursussen.CursusConfig;
 import com.example.ObaProject.results.activiteiten.Activiteit;
 import com.example.ObaProject.results.activiteiten.ActiviteitConfig;
+import com.example.ObaProject.results.cursussen.CursusResponse;
 import com.example.ObaProject.results.facet.FacetConfig;
 import com.example.ObaProject.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,30 +50,33 @@ public class ApiService {
         this.resultConfig = resultConfig;
     }
 
-    public Response search(String search_value) {
+//    public Response search(String search_value) {
+//
+//        StringBuilder query = queryArrange.getQuery(search_value);
+//        String url = apiConfig.getUrl() +
+//                     query +
+//                     apiConfig.getAuthorization() +
+//                     "&refine=true";
+//        System.out.println(url);
+//        Document doc = request.sendRequest(url);
+//        Response search = resultConfig.resultsToJson(doc.getElementsByTagName("result"));
+//        return search;
+//    }
 
-        StringBuilder query = queryArrange.getQuery(search_value);
-        String url = apiConfig.getUrl() +
-                     query +
-                     apiConfig.getAuthorization() +
-                     "&refine=true";
-        Document doc = request.sendRequest(url);
-        Response search = resultConfig.resultsToJson(doc.getElementsByTagName("result"));
-        return search;
-    }
-
-    public List<Boek> boekenSearch(String search_value) {
+    public BoekResponse boekenSearch(String search_value) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                     query +
                     apiConfig.getAuthorization() +
-                    "&refine=true" +
-                    apiConfig.getSort();
+                    "&refine=true";
         Document doc = request.sendRequest(url);
-        return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
+        BoekResponse response = new BoekResponse();
+        response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
+        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return response;
     }
 
-    public List<String> categorieen() {
+    public List<String> boekenCategorieen() {
         String url = apiConfig.getCategorieen() +
                      apiConfig.getAuthorization();
         Document doc = request.sendRequest(url);
@@ -82,7 +88,7 @@ public class ApiService {
         return res;
     }
 
-    public List<Boek> categorie(String categorie_naam) {
+    public List<Boek> boekenCategorie(String categorie_naam) {
         String url = apiConfig.getUrl() +
                     "classification:" +
                     categorie_naam +
@@ -91,7 +97,7 @@ public class ApiService {
         return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
     }
 
-    public List<Boek> categorieSearch(String categorie_naam, String search_value) {
+    public List<Boek> boekenCategorieSearch(String categorie_naam, String search_value) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                     "classification:" +
@@ -103,25 +109,32 @@ public class ApiService {
         return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
     }
 
-    public List<Activiteit> activiteiten() {
+    public ActiviteitResponse activiteiten() {
         String url = apiConfig.getUrl() +
                     "table:activiteiten" +
                     apiConfig.getAuthorization() +
                     "&refine=true" +
                     apiConfig.getSort();
         Document doc = request.sendRequest(url);
-        return activiteitConfig.resultsToJson(doc.getElementsByTagName("result"));
+        ActiviteitResponse response = new ActiviteitResponse();
+        response.setActiviteiten(activiteitConfig.resultsToJson(doc.getElementsByTagName("result")));
+        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return response;
 
     }
-    public List<Activiteit> activiteitenSearch(String search_value) {
+    public ActiviteitResponse activiteitenSearch(String search_value) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                 "table:activiteiten%20" +
                 query +
                 apiConfig.getAuthorization() +
                 "&refine=true";
+        System.out.println(url);
         Document doc = request.sendRequest(url);
-        return activiteitConfig.resultsToJson(doc.getElementsByTagName("result"));
+        ActiviteitResponse response = new ActiviteitResponse();
+        response.setActiviteiten(activiteitConfig.resultsToJson(doc.getElementsByTagName("result")));
+        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return response;
     }
 
 //    public Response activiteitenSearch(String wijk_naam) {
@@ -137,17 +150,20 @@ public class ApiService {
 //                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
 //    }
 
-    public List<Cursus> cursussen() {
+    public CursusResponse cursussen() {
         String url = apiConfig.getUrl() +
                 "table:jsonsrc" +
                 apiConfig.getAuthorization() +
                 "&refine=true" +
                 apiConfig.getSort();
         Document doc = request.sendRequest(url);
-        return cursusConfig.resultsToJson(doc.getElementsByTagName("result"));
+        CursusResponse response = new CursusResponse();
+        response.setCursussen(cursusConfig.resultsToJson(doc.getElementsByTagName("result")));
+        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return response;
     }
 
-    public List<Cursus> cursussenSearch(String search_value) {
+    public CursusResponse cursussenSearch(String search_value) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                 "table:jsonsrc%20" +
@@ -155,7 +171,10 @@ public class ApiService {
                 apiConfig.getAuthorization() +
                 "&refine=true";
         Document doc = request.sendRequest(url);
-        return cursusConfig.resultsToJson(doc.getElementsByTagName("result"));
+        CursusResponse response = new CursusResponse();
+        response.setCursussen(cursusConfig.resultsToJson(doc.getElementsByTagName("result")));
+        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return response;
     }
 
 

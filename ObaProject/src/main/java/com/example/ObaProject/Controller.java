@@ -1,10 +1,10 @@
 package com.example.ObaProject;
 
 import com.example.ObaProject.api.ApiService;
+import com.example.ObaProject.results.activiteiten.ActiviteitResponse;
 import com.example.ObaProject.results.boeken.Boek;
-import com.example.ObaProject.results.cursussen.Cursus;
-import com.example.ObaProject.results.activiteiten.Activiteit;
-import com.example.ObaProject.response.Response;
+import com.example.ObaProject.results.boeken.BoekResponse;
+import com.example.ObaProject.results.cursussen.CursusResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,42 +24,42 @@ public class Controller {
 
     // SEARCH
 
-    @GetMapping("/search/{search_value}")
-    public Response search(@PathVariable String search_value) {
-        return service.search(search_value);
-    }
+//    @GetMapping("/search/{search_value}")
+//    public Response search(@PathVariable String search_value) {
+//        return service.search(search_value);
+//    }
+
+    // CATEGORIEEN en BOEKEN
 
     @GetMapping("/boeken/{search_value}")
-    public List<Boek> boekenSearch(@PathVariable String search_value) {
+    public BoekResponse boekenSearch(@PathVariable String search_value) {
         return service.boekenSearch(search_value);
     }
 
-    // CATEGORIEEN
-
     @GetMapping("/boeken/categorieen")
-    public List<String> categorieen() {
-        return service.categorieen();
+    public List<String> boekenCategorieen() {
+        return service.boekenCategorieen();
     }
 
     @GetMapping("/boeken/categorieen/{categorie_naam}")
-    public List<Boek> categorie(@PathVariable String categorie_naam) {
-        return service.categorie(categorie_naam);
+    public List<Boek> boekenCategorie(@PathVariable String categorie_naam) {
+        return service.boekenCategorie(categorie_naam);
     }
 
     @GetMapping("/boeken/categorieen/{categorie_naam}/{search_value}")
-    public List<Boek> categorieSearch(@PathVariable String categorie_naam, @PathVariable String search_value) {
-        return service.categorieSearch(categorie_naam, search_value);
+    public List<Boek> boekenCategorieSearch(@PathVariable String categorie_naam, @PathVariable String search_value) {
+        return service.boekenCategorieSearch(categorie_naam, search_value);
     }
 
     // ACTIVITEITEN
 
     @GetMapping("/activiteiten")
-    public List<Activiteit> activiteiten() {
+    public ActiviteitResponse activiteiten() {
         return service.activiteiten();
     }
 
     @GetMapping("/activiteiten/{search_value}")
-    public List<Activiteit> activiteitenSearch(@PathVariable String search_value) {
+    public ActiviteitResponse activiteitenSearch(@PathVariable String search_value) {
         return service.activiteitenSearch(search_value);
     }
 //    @GetMapping("/activiteiten/{wijk_naam}")
@@ -70,12 +70,12 @@ public class Controller {
     // CURSUSSEN
 
     @GetMapping("/cursussen")
-    public List<Cursus> cursussen() {
+    public CursusResponse cursussen() {
         return service.cursussen();
     }
 
     @GetMapping("/cursussen/{search_value}")
-    public List<Cursus> cursussenSearch(@PathVariable String search_value) {
+    public CursusResponse cursussenSearch(@PathVariable String search_value) {
         return service.cursussenSearch(search_value);
     }
 }

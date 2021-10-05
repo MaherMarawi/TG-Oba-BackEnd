@@ -11,10 +11,11 @@ import java.util.List;
 public class FacetConfig {
 
     public Facet resultsToJson(NodeList list) {
-        List<FacetItem> facetItemList = new ArrayList<>();
+
         Facet facet = new Facet();
         for (int itr = 0; itr < list.getLength(); itr++)
         {
+            List<FacetItem> facetItemList = new ArrayList<>();
             Node node = list.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {

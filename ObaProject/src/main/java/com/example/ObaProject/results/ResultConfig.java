@@ -47,6 +47,7 @@ public class ResultConfig {
                 Result result = new Result();
 
                 String genre = checkValue(eElement, "format") ? eElement.getElementsByTagName("format").item(0).getTextContent() : "";
+                System.out.println(genre);
                 switch (genre) {
                     case "Activiteiten":
                         activiteiten.add(activiteitConfig.getActiviteit(eElement));
@@ -59,7 +60,7 @@ public class ResultConfig {
                 }
             }
         }
-        return new Response(boeken, activiteiten, cursussen);
+        return new Response();
     }
 
     public static boolean checkValue(Element e, String attr) {
