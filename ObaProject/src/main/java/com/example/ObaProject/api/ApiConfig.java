@@ -9,10 +9,9 @@ import org.springframework.context.annotation.Configuration;
 public class ApiConfig {
 
     private String url ;
-    private String publicKey;
+    private String authorization;
     private String secretKey;
     private String categorieen;
-//    private String activiteiten;
     private String sort;
 
     public ApiConfig() {
@@ -34,13 +33,7 @@ public class ApiConfig {
         this.categorieen = categorieen;
     }
 
-//    public String getActiviteiten() {
-//        return activiteiten;
-//    }
 
-//    public void setActiviteiten(String activiteiten) {
-//        this.activiteiten = activiteiten;
-//    }
 
     public String getUrl() {
         return url;
@@ -48,11 +41,11 @@ public class ApiConfig {
     public void setUrl(String api) {
         this.url = api;
     }
-    public String getPublicKey() {
-        return publicKey;
+    public String getAuthorization() {
+        return authorization;
     }
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
+    public void setAuthorization(String publicKey) {
+        this.authorization = publicKey;
     }
     public String getSecretKey() {
         return secretKey;

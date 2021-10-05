@@ -1,14 +1,17 @@
-package com.example.ObaProject.results.evenementen;
+package com.example.ObaProject.results.activiteiten;
 
 import com.example.ObaProject.results.Result;
 
-public class Event extends Result {
+public class Activiteit extends Result {
 
     private String doelgroep;
     private String begin;
     private String einde;
+    private String jaar;
 
-    public Event() {
+
+
+    public Activiteit() {
     }
 
     public String getDoelgroep() {
@@ -20,6 +23,9 @@ public class Event extends Result {
     public String getEinde() {
         return einde;
     }
+    public String getJaar() {
+        return jaar;
+    }
 
     public void setDoelgroep(String doelgroep) {
         this.doelgroep = doelgroep;
@@ -29,6 +35,9 @@ public class Event extends Result {
     }
     public void setEinde(String einde) {
         this.einde = einde;
+    }
+    public void setJaar(String jaar) {
+        this.jaar = jaar;
     }
 
 
