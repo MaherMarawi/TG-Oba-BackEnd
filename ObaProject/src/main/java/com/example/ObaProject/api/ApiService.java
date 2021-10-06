@@ -12,6 +12,7 @@ import com.example.ObaProject.results.activiteiten.ActiviteitConfig;
 import com.example.ObaProject.results.cursussen.CursusResponse;
 import com.example.ObaProject.results.facet.FacetConfig;
 import com.example.ObaProject.response.Response;
+import com.example.ObaProject.results.test.Samen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.*;
 import java.util.ArrayList;
@@ -177,6 +178,12 @@ public class ApiService {
         return response;
     }
 
+    public Samen activiteit_cusus() {
+        Samen samen = new Samen();
+        samen.setActiviteiten(activiteiten());
+        samen.setCursussen(cursussen());
+        return samen;
+    }
 
 
 //        private static Response response(String url) {

@@ -5,6 +5,7 @@ import com.example.ObaProject.results.activiteiten.ActiviteitResponse;
 import com.example.ObaProject.results.boeken.Boek;
 import com.example.ObaProject.results.boeken.BoekResponse;
 import com.example.ObaProject.results.cursussen.CursusResponse;
+import com.example.ObaProject.results.test.Samen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,4 +79,15 @@ public class Controller {
     public CursusResponse cursussenSearch(@PathVariable String search_value) {
         return service.cursussenSearch(search_value);
     }
+
+
+
+
+
+
+    @GetMapping("/alles")
+    public Samen activiteit_cusus() {
+        return service.activiteit_cusus();
+    }
+
 }
