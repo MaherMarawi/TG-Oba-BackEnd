@@ -1,6 +1,5 @@
 package com.example.ObaProject.controllers;
 
-import com.example.ObaProject.api.ApiService;
 import com.example.ObaProject.response.CursusResponse;
 import com.example.ObaProject.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;

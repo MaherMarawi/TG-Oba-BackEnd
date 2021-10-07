@@ -55,6 +55,7 @@ public class CourseService {
         CursusResponse response = new CursusResponse();
         response.setCursussen(cursusConfig.resultsToJson(doc.getElementsByTagName("result")));
         response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        System.out.println(response.getCursussen().size());
         return response;
     }
 
