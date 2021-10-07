@@ -1,5 +1,6 @@
-package com.example.ObaProject.results.activiteiten;
+package com.example.ObaProject.configuration;
 
+import com.example.ObaProject.data.Activiteit;
 import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

@@ -1,8 +1,8 @@
 package com.example.ObaProject.response;
-import com.example.ObaProject.results.activiteiten.Activiteit;
-import com.example.ObaProject.results.boeken.Boek;
-import com.example.ObaProject.results.cursussen.Cursus;
-import com.example.ObaProject.results.facet.Facet;
+import com.example.ObaProject.data.Activiteit;
+import com.example.ObaProject.data.Boek;
+import com.example.ObaProject.data.Cursus;
+import com.example.ObaProject.data.Facet;
 
 import java.util.List;
 

@@ -1,6 +1,4 @@
-package com.example.ObaProject.results.boeken;
-
-import com.example.ObaProject.results.Result;
+package com.example.ObaProject.data;
 
 import java.util.ArrayList;
 

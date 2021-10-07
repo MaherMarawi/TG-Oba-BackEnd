@@ -1,11 +1,9 @@
-package com.example.ObaProject.results;
+package com.example.ObaProject.configuration;
 
-import com.example.ObaProject.results.activiteiten.Activiteit;
-import com.example.ObaProject.results.activiteiten.ActiviteitConfig;
-import com.example.ObaProject.results.boeken.Boek;
-import com.example.ObaProject.results.boeken.BoekConfig;
-import com.example.ObaProject.results.cursussen.Cursus;
-import com.example.ObaProject.results.cursussen.CursusConfig;
+import com.example.ObaProject.data.Result;
+import com.example.ObaProject.data.Activiteit;
+import com.example.ObaProject.data.Boek;
+import com.example.ObaProject.data.Cursus;
 import com.example.ObaProject.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

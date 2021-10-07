@@ -1,6 +1,7 @@
-package com.example.ObaProject.results.activiteiten;
+package com.example.ObaProject.response;
 
-import com.example.ObaProject.results.facet.Facet;
+import com.example.ObaProject.data.Activiteit;
+import com.example.ObaProject.data.Facet;
 
 import java.util.List;
 

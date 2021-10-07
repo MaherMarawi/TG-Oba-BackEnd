@@ -1,6 +1,4 @@
-package com.example.ObaProject.results.cursussen;
-
-import com.example.ObaProject.results.Result;
+package com.example.ObaProject.data;
 
 public class Cursus extends Result {
 

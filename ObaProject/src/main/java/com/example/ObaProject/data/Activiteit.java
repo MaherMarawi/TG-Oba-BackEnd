@@ -1,6 +1,4 @@
-package com.example.ObaProject.results.activiteiten;
-
-import com.example.ObaProject.results.Result;
+package com.example.ObaProject.data;
 
 public class Activiteit extends Result {
 

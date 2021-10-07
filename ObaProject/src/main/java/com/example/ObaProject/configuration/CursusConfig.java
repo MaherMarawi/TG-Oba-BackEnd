@@ -1,5 +1,6 @@
-package com.example.ObaProject.results.cursussen;
+package com.example.ObaProject.configuration;
 
+import com.example.ObaProject.data.Cursus;
 import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

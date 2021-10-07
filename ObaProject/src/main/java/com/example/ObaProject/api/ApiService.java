@@ -1,18 +1,16 @@
 package com.example.ObaProject.api;
 
-import com.example.ObaProject.results.ResultConfig;
-import com.example.ObaProject.results.activiteiten.ActiviteitResponse;
-import com.example.ObaProject.results.boeken.Boek;
-import com.example.ObaProject.results.boeken.BoekConfig;
-import com.example.ObaProject.results.boeken.BoekResponse;
-import com.example.ObaProject.results.cursussen.Cursus;
-import com.example.ObaProject.results.cursussen.CursusConfig;
-import com.example.ObaProject.results.activiteiten.Activiteit;
-import com.example.ObaProject.results.activiteiten.ActiviteitConfig;
-import com.example.ObaProject.results.cursussen.CursusResponse;
-import com.example.ObaProject.results.facet.FacetConfig;
-import com.example.ObaProject.response.Response;
-import com.example.ObaProject.results.test.Samen;
+import com.example.ObaProject.configuration.ApiConfig;
+import com.example.ObaProject.configuration.ResultConfig;
+import com.example.ObaProject.response.ActiviteitResponse;
+import com.example.ObaProject.data.Boek;
+import com.example.ObaProject.configuration.BoekConfig;
+import com.example.ObaProject.response.BoekResponse;
+import com.example.ObaProject.configuration.CursusConfig;
+import com.example.ObaProject.configuration.ActiviteitConfig;
+import com.example.ObaProject.response.CursusResponse;
+import com.example.ObaProject.configuration.FacetConfig;
+import com.example.ObaProject.data.Samen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.*;
 import java.util.ArrayList;
@@ -64,126 +62,19 @@ public class ApiService {
 //        return search;
 //    }
 
-    public BoekResponse boekenSearch(String search_value) {
-        StringBuilder query = queryArrange.getQuery(search_value);
-        String url = apiConfig.getUrl() +
-                    query +
-                    apiConfig.getAuthorization() +
-                    "&refine=true";
-        Document doc = request.sendRequest(url);
-        BoekResponse response = new BoekResponse();
-        response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
-    }
 
-    public List<String> boekenCategorieen() {
-        String url = apiConfig.getCategorieen() +
-                     apiConfig.getAuthorization();
-        Document doc = request.sendRequest(url);
-        NodeList results = doc.getElementsByTagName("result");
-        List<String> res = new ArrayList<>();
-        for (int i = 0; i < results.getLength(); i++) {
-            res.add(results.item(i).getTextContent());
-        }
-        return res;
-    }
 
-    public List<Boek> boekenCategorie(String categorie_naam) {
-        String url = apiConfig.getUrl() +
-                    "classification:" +
-                    categorie_naam +
-                    apiConfig.getAuthorization();
-        Document doc = request.sendRequest(url);
-        return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
-    }
 
-    public List<Boek> boekenCategorieSearch(String categorie_naam, String search_value) {
-        StringBuilder query = queryArrange.getQuery(search_value);
-        String url = apiConfig.getUrl() +
-                    "classification:" +
-                    categorie_naam +
-                    "%20" +
-                    query +
-                    apiConfig.getAuthorization();
-        Document doc = request.sendRequest(url);
-        return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
-    }
 
-    public ActiviteitResponse activiteiten() {
-        String url = apiConfig.getUrl() +
-                    "table:activiteiten" +
-                    apiConfig.getAuthorization() +
-                    "&refine=true" +
-                    apiConfig.getSort();
-        Document doc = request.sendRequest(url);
-        ActiviteitResponse response = new ActiviteitResponse();
-        response.setActiviteiten(activiteitConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
 
-    }
-    public ActiviteitResponse activiteitenSearch(String search_value) {
-        StringBuilder query = queryArrange.getQuery(search_value);
-        String url = apiConfig.getUrl() +
-                "table:activiteiten%20" +
-                query +
-                apiConfig.getAuthorization() +
-                "&refine=true";
-        System.out.println(url);
-        Document doc = request.sendRequest(url);
-        ActiviteitResponse response = new ActiviteitResponse();
-        response.setActiviteiten(activiteitConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
-    }
 
-//    public Response activiteitenSearch(String wijk_naam) {
-//        String url = apiConfig.getUrl() +
-//                "table:activiteiten" +
-//                apiConfig.getAuthorization() +
-//                "&refine=true" +
-//                apiConfig.getSort() +
-//                "&branch=OBA%20" +
-//                wijk_naam;
-//        Document doc = request.sendRequest(url);
-//        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
-//                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+
+//    public Samen activiteit_cusus() {
+//        Samen samen = new Samen();
+//        samen.setActiviteiten(getActivities());
+//        samen.setCursussen(getCourses());
+//        return samen;
 //    }
-
-    public CursusResponse cursussen() {
-        String url = apiConfig.getUrl() +
-                "table:jsonsrc" +
-                apiConfig.getAuthorization() +
-                "&refine=true" +
-                apiConfig.getSort();
-        Document doc = request.sendRequest(url);
-        CursusResponse response = new CursusResponse();
-        response.setCursussen(cursusConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
-    }
-
-    public CursusResponse cursussenSearch(String search_value) {
-        StringBuilder query = queryArrange.getQuery(search_value);
-        String url = apiConfig.getUrl() +
-                "table:jsonsrc%20" +
-                query +
-                apiConfig.getAuthorization() +
-                "&refine=true";
-        Document doc = request.sendRequest(url);
-        CursusResponse response = new CursusResponse();
-        response.setCursussen(cursusConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
-    }
-
-    public Samen activiteit_cusus() {
-        Samen samen = new Samen();
-        samen.setActiviteiten(activiteiten());
-        samen.setCursussen(cursussen());
-        return samen;
-    }
 
 
 //        private static Response response(String url) {

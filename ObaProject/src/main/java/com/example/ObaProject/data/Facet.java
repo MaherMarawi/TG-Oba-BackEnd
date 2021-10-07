@@ -1,4 +1,6 @@
-package com.example.ObaProject.results.facet;
+package com.example.ObaProject.data;
+
+import com.example.ObaProject.response.FacetItem;
 
 public class Facet {
     private FacetItem[] type;

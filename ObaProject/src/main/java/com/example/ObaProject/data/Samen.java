@@ -1,11 +1,7 @@
-package com.example.ObaProject.results.test;
+package com.example.ObaProject.data;
 
-import com.example.ObaProject.results.activiteiten.Activiteit;
-import com.example.ObaProject.results.activiteiten.ActiviteitResponse;
-import com.example.ObaProject.results.cursussen.Cursus;
-import com.example.ObaProject.results.cursussen.CursusResponse;
-
-import java.util.List;
+import com.example.ObaProject.response.ActiviteitResponse;
+import com.example.ObaProject.response.CursusResponse;
 
 public class Samen {
 

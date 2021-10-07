@@ -1,4 +1,4 @@
-package com.example.ObaProject.api;
+package com.example.ObaProject.configuration;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

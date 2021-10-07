@@ -1,4 +1,4 @@
-package com.example.ObaProject.results;
+package com.example.ObaProject.data;
 
 import java.util.ArrayList;
 
