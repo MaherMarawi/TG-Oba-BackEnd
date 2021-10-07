@@ -11,6 +11,8 @@ import com.example.ObaProject.configuration.ActiviteitConfig;
 import com.example.ObaProject.response.CursusResponse;
 import com.example.ObaProject.configuration.FacetConfig;
 import com.example.ObaProject.data.Samen;
+import com.example.ObaProject.services.ActivityService;
+import com.example.ObaProject.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.*;
 import java.util.ArrayList;
@@ -19,36 +21,14 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class ApiService {
 
-    private final ApiConfig apiConfig;
-    private final QueryArrange queryArrange;
-//    private final SearchConfig resConfig;
-    private final FacetConfig facetConfig;
-    private final GetRequest request;
-    private final ActiviteitConfig activiteitConfig;
-    private final CursusConfig cursusConfig;
-    private final BoekConfig boekConfig;
-    private final ResultConfig resultConfig;
-
     @Autowired
-    public ApiService(ApiConfig apiConfig,
-                      QueryArrange queryArrange,
-                      FacetConfig facetConfig,
-                      ActiviteitConfig activiteitConfig,
-                      CursusConfig cursusConfig,
-                      BoekConfig boekConfig,
-                      ResultConfig resultConfig,
-                      GetRequest request) {
-        this.apiConfig = apiConfig;
-        this.queryArrange = queryArrange;
-//        this.resConfig = resConfig;
-        this.facetConfig = facetConfig;
-        this.request = request;
-        this.activiteitConfig = activiteitConfig;
-        this.cursusConfig = cursusConfig;
-        this.boekConfig = boekConfig;
-        this.resultConfig = resultConfig;
+    private ActivityService activityService;
+    private CourseService courseService;
+    public ApiService(ActivityService activityService,
+                      CourseService courseService) {
+        this.activityService = activityService;
+        this.courseService = courseService;
     }
-
 //    public Response search(String search_value) {
 //
 //        StringBuilder query = queryArrange.getQuery(search_value);
@@ -62,24 +42,10 @@ public class ApiService {
 //        return search;
 //    }
 
-
-
-
-
-
-
-
-//    public Samen activiteit_cusus() {
-//        Samen samen = new Samen();
-//        samen.setActiviteiten(getActivities());
-//        samen.setCursussen(getCourses());
-//        return samen;
-//    }
-
-
-//        private static Response response(String url) {
-//            Document doc = request.sendRequest(url);
-//            return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
-//                    facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-//    }
+    public Samen activiteit_cusus() {
+        Samen samen = new Samen();
+        samen.setActiviteiten(activityService.getActivities());
+        samen.setCursussen(courseService.getCourses());
+        return samen;
+    }
 }

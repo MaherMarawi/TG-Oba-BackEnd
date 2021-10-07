@@ -1,6 +1,7 @@
 package com.example.ObaProject.controllers;
 
 import com.example.ObaProject.api.ApiService;
+import com.example.ObaProject.data.Samen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +25,8 @@ public class Controller {
 //    }
 
 //
-//    @GetMapping("/alles")
-//    public Samen activiteit_cusus() {
-//        return service.activiteit_cusus();
-//    }
+    @GetMapping("/alles")
+    public Samen activiteit_cusus() {
+        return service.activiteit_cusus();
+    }
 }

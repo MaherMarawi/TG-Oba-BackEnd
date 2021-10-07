@@ -30,8 +30,8 @@ public class ActivityController {
     public ActiviteitResponse searchActivity(@PathVariable String search_value) {
         return activityService.searchActivity(search_value);
     }
-//    @GetMapping("/{wijk_naam}")
-//    public Response activiteitenSearch(@PathVariable String wijk_naam) {
-//        return activityService.activiteitenSearch(wijk_naam);
-//    }
+    @GetMapping("/wijk/{wijk_naam}")
+    public ActiviteitResponse getActivitiesInLocation(@PathVariable String wijk_naam) {
+        return activityService.getActivitiesInLocation(wijk_naam);
+    }
 }

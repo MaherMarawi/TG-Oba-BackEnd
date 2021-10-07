@@ -57,17 +57,20 @@ public class ActivityService {
         return response;
     }
 
-//        public Response activiteitenSearch(String wijk_naam) {
-//        String url = apiConfig.getUrl() +
-//                "table:activiteiten" +
-//                apiConfig.getAuthorization() +
-//                "&refine=true" +
-//                apiConfig.getSort() +
-//                "&branch=OBA%20" +
-//                wijk_naam;
-//        Document doc = request.sendRequest(url);
-//        return new Response(resConfig.resultsToJson(doc.getElementsByTagName("result")),
-//                facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-//    }
+        public ActiviteitResponse getActivitiesInLocation(String wijk_naam) {
+        String url = apiConfig.getUrl() +
+                "search/?q=table:activiteiten" +
+                apiConfig.getAuthorization() +
+                "&refine=true" +
+                apiConfig.getSort() +
+                "&branch=OBA%20" +
+                wijk_naam;
+            System.out.println(url);
+        Document doc = request.sendRequest(url);
+            ActiviteitResponse response = new ActiviteitResponse();
+            response.setActiviteiten(activiteitConfig.resultsToJson(doc.getElementsByTagName("result")));
+            response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+            return response;
+    }
 
 }
