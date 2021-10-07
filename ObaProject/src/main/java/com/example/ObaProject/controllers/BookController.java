@@ -23,13 +23,21 @@ public class BookController {
     }
 
     @GetMapping("")
-    public String main(@PathVariable String search_value) {
-        return "hello";
+    public BoekResponse getBooks() {
+        return bookService.getBooks("&refine=true");
+    }
+    @GetMapping("/largetype")
+    public BoekResponse getLargetypeBooks() {
+        return bookService.getLargetypeBooks();
     }
 
     @GetMapping("/{search_value}")
     public BoekResponse searchBook(@PathVariable String search_value) {
-        return bookService.searchBook(search_value);
+        return bookService.searchBook(search_value, "&refine=true");
+    }
+    @GetMapping("/largetype/{search_value}")
+    public BoekResponse searchLargetypeBook(@PathVariable String search_value) {
+        return bookService.searchLargetypeBook(search_value);
     }
 
     @GetMapping("/categorieen")

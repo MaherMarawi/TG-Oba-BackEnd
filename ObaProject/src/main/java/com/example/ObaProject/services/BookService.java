@@ -24,10 +24,10 @@ public class BookService {
 
     @Autowired
     public BookService(ApiConfig apiConfig,
-                      QueryArrange queryArrange,
-                      FacetConfig facetConfig,
-                      BoekConfig boekConfig,
-                      GetRequest request) {
+                       QueryArrange queryArrange,
+                       FacetConfig facetConfig,
+                       BoekConfig boekConfig,
+                       GetRequest request) {
         this.apiConfig = apiConfig;
         this.queryArrange = queryArrange;
         this.facetConfig = facetConfig;
@@ -35,19 +35,42 @@ public class BookService {
         this.boekConfig = boekConfig;
     }
 
-    public BoekResponse searchBook(String search_value) {
-        StringBuilder query = queryArrange.getQuery(search_value);
+    public BoekResponse getBooks(String key) {
         String url = apiConfig.getUrl() +
-                "search/?q=" +
-                query +
+                "search/?q=special:all" +
                 apiConfig.getAuthorization() +
-                "&refine=true";
+                key ;
         Document doc = request.sendRequest(url);
         BoekResponse response = new BoekResponse();
         response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
         response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
         return response;
     }
+
+
+    public BoekResponse searchBook(String search_value, String key) {
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                "search/?q=" +
+                query +
+                apiConfig.getAuthorization() +
+                key ;
+        Document doc = request.sendRequest(url);
+        BoekResponse response = new BoekResponse();
+        response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
+        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
+        return response;
+    }
+
+    public BoekResponse getLargetypeBooks() {
+        String key = "&refine=true&facet=type(largetype)";
+        return getBooks(key);
+    }
+    public BoekResponse searchLargetypeBook(String search_value) {
+        String key = "&refine=true&facet=type(largetype)";
+        return searchBook(search_value, key);
+    }
+
 
     public List<String> getBooksCategories() {
         String url = apiConfig.getUrl() +
@@ -82,4 +105,8 @@ public class BookService {
         Document doc = request.sendRequest(url);
         return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
     }
+
+
 }
+
+
