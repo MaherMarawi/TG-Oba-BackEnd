@@ -22,7 +22,6 @@ public class CourseService {
                       QueryArrange queryArrange,
                       FacetConfig facetConfig,
                       CursusConfig cursusConfig,
-                      ResultConfig resultConfig,
                       GetRequest request) {
         this.apiConfig = apiConfig;
         this.queryArrange = queryArrange;
