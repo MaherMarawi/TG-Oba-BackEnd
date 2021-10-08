@@ -49,7 +49,6 @@ public class ActivityService {
                 query +
                 apiConfig.getAuthorization() +
                 "&refine=true";
-        System.out.println(url);
         Document doc = request.sendRequest(url);
         ActiviteitResponse response = new ActiviteitResponse();
         response.setActiviteiten(activiteitConfig.resultsToJson(doc.getElementsByTagName("result")));

@@ -21,9 +21,9 @@ public class BoekConfig {
             {
                 Element eElement = (Element) node;
                 String genre = checkValue(eElement, "format") ? eElement.getElementsByTagName("format").item(0).getTextContent() : "";
-                if (!genre.equals("Activiteiten") && !genre.equals("Cursus")) {
+//                if (!genre.equals("Activiteiten") && !genre.equals("Cursus")) {
                     boeken.add(getBoek(eElement));
-                }
+//                }
             }
         }
         return boeken;

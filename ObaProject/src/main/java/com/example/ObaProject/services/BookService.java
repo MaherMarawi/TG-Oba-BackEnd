@@ -37,9 +37,9 @@ public class BookService {
 
     public BoekResponse getBooks(String key) {
         String url = apiConfig.getUrl() +
-                "search/?q=special:all" +
-                apiConfig.getAuthorization() +
-                key ;
+                     "search/?q=special:all" +
+                     apiConfig.getAuthorization() +
+                     key ;
         Document doc = request.sendRequest(url);
         BoekResponse response = new BoekResponse();
         response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
@@ -51,10 +51,10 @@ public class BookService {
     public BoekResponse searchBook(String search_value, String key) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
-                "search/?q=" +
-                query +
-                apiConfig.getAuthorization() +
-                key ;
+                     "search/?q=" +
+                     query +
+                     apiConfig.getAuthorization() +
+                     key ;
         Document doc = request.sendRequest(url);
         BoekResponse response = new BoekResponse();
         response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
@@ -74,8 +74,8 @@ public class BookService {
 
     public List<String> getBooksCategories() {
         String url = apiConfig.getUrl() +
-                "index/classification/?" +
-                apiConfig.getAuthorization().substring(1, apiConfig.getAuthorization().length());
+                     "index/classification/?" +
+                     apiConfig.getAuthorization().substring(1, apiConfig.getAuthorization().length());
         Document doc = request.sendRequest(url);
         NodeList results = doc.getElementsByTagName("result");
         List<String> res = new ArrayList<>();
@@ -87,9 +87,9 @@ public class BookService {
 
     public List<Boek> getCategory(String categorie_naam) {
         String url = apiConfig.getUrl() +
-                "search/?q=classification:" +
-                categorie_naam +
-                apiConfig.getAuthorization();
+                     "search/?q=classification:" +
+                     categorie_naam +
+                     apiConfig.getAuthorization();
         Document doc = request.sendRequest(url);
         return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
     }
@@ -97,11 +97,11 @@ public class BookService {
     public List<Boek> SearchInsideCategory(String categorie_naam, String search_value) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
-                "search/?q=classification:" +
-                categorie_naam +
-                "%20" +
-                query +
-                apiConfig.getAuthorization();
+                     "search/?q=classification:" +
+                     categorie_naam +
+                     "%20" +
+                     query +
+                     apiConfig.getAuthorization();
         Document doc = request.sendRequest(url);
         return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
     }

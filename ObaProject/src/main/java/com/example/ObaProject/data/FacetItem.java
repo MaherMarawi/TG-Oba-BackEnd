@@ -1,4 +1,4 @@
-package com.example.ObaProject.response;
+package com.example.ObaProject.data;
 
 public class FacetItem {
     private String count;

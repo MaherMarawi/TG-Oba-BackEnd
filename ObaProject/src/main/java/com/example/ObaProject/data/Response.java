@@ -1,11 +1,14 @@
-package com.example.ObaProject.response;
+package com.example.ObaProject.data;
 import com.example.ObaProject.data.Activiteit;
 import com.example.ObaProject.data.Boek;
 import com.example.ObaProject.data.Cursus;
 import com.example.ObaProject.data.Facet;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Configuration
 public class Response {
 
     private List<Boek> boeken;

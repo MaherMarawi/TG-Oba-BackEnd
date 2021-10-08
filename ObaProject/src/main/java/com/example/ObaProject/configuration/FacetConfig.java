@@ -1,7 +1,7 @@
 package com.example.ObaProject.configuration;
 
 import com.example.ObaProject.data.Facet;
-import com.example.ObaProject.response.FacetItem;
+import com.example.ObaProject.data.FacetItem;
 import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

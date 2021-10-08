@@ -4,7 +4,7 @@ import com.example.ObaProject.data.Result;
 import com.example.ObaProject.data.Activiteit;
 import com.example.ObaProject.data.Boek;
 import com.example.ObaProject.data.Cursus;
-import com.example.ObaProject.response.Response;
+import com.example.ObaProject.data.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;
