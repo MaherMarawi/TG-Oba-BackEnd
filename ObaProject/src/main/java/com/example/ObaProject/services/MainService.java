@@ -22,7 +22,7 @@ public class MainService {
     public MainResponse search(String search_value) {
         MainResponse response = new MainResponse();
         response.setActiviteiten(activityService.searchActivity(search_value));
-        response.setBooks(bookService.searchBook(search_value, "&refine=true"));
+        response.setBoeken(bookService.searchBook(search_value, "&refine=true"));
         response.setCursussen(courseService.searchCourse(search_value));
         return response;
     }

@@ -9,11 +9,12 @@ public class MainResponse {
     public MainResponse() {
     }
 
-    public BoekResponse getBooks() {
+
+    public BoekResponse getBoeken() {
         return boeken;
     }
 
-    public void setBooks(BoekResponse boeken) {
+    public void setBoeken(BoekResponse boeken) {
         this.boeken = boeken;
     }
 
