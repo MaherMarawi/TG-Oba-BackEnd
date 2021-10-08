@@ -1,14 +1,8 @@
 package com.example.ObaProject.response;
 
-import com.example.ObaProject.data.Activiteit;
-import com.example.ObaProject.data.Boek;
-import com.example.ObaProject.data.Cursus;
-
-import java.util.List;
-
 public class MainResponse {
 
-    private BoekResponse books;
+    private BoekResponse boeken;
     private ActiviteitResponse activiteiten;
     private CursusResponse cursussen;
 
@@ -16,11 +10,11 @@ public class MainResponse {
     }
 
     public BoekResponse getBooks() {
-        return books;
+        return boeken;
     }
 
-    public void setBooks(BoekResponse books) {
-        this.books = books;
+    public void setBooks(BoekResponse boeken) {
+        this.boeken = boeken;
     }
 
     public ActiviteitResponse getActiviteiten() {

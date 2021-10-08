@@ -1,15 +1,9 @@
 package com.example.ObaProject.services;
 
-import com.example.ObaProject.api.GetRequest;
-import com.example.ObaProject.api.QueryArrange;
-import com.example.ObaProject.configuration.ApiConfig;
-import com.example.ObaProject.configuration.ResultConfig;
 import com.example.ObaProject.data.Samen;
-import com.example.ObaProject.data.Response;
 import com.example.ObaProject.response.MainResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.*;
 
 @Service
 public class MainService {
