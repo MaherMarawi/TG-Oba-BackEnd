@@ -29,6 +29,7 @@ public class ActiviteitConfig {
     }
     public Activiteit getActiviteit(Element eElement) {
         Activiteit activiteit = new Activiteit();
+        activiteit.setId(getId(eElement));
         activiteit.setJaar(checkValue(eElement, "year") ? eElement.getElementsByTagName("year").item(0).getTextContent() : "");
         activiteit.setBeschrijving(checkValue(eElement, "summaries") ? eElement.getElementsByTagName("summaries").item(0).getTextContent() : "");
         activiteit.setGenre(checkValue(eElement, "format") ? eElement.getElementsByTagName("format").item(0).getTextContent() : "");
@@ -44,5 +45,10 @@ public class ActiviteitConfig {
     public static boolean checkValue(Element e, String attr) {
         Optional<Node> opt = Optional.ofNullable(e.getElementsByTagName(attr).item(0));
         return opt.isPresent();
+    }
+    public static String getId(Element e) {
+        NodeList n = checkValue(e, "id") ? e.getElementsByTagName("id") : null;
+        Element eE = (Element) n.item(0);
+        return eE.getAttribute("nativeid");
     }
 }

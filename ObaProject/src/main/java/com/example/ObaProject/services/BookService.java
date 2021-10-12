@@ -18,57 +18,53 @@ public class BookService {
 
     private final ApiConfig apiConfig;
     private final QueryArrange queryArrange;
-    private final FacetConfig facetConfig;
-    private final GetRequest request;
-    private final BoekConfig boekConfig;
+    private static GetRequest request;
+    private static BoekConfig boekConfig;
+    private static MetaConfig metaConfig;
 
     @Autowired
     public BookService(ApiConfig apiConfig,
                        QueryArrange queryArrange,
-                       FacetConfig facetConfig,
                        BoekConfig boekConfig,
+                       MetaConfig metaConfig,
                        GetRequest request) {
         this.apiConfig = apiConfig;
         this.queryArrange = queryArrange;
-        this.facetConfig = facetConfig;
         this.request = request;
         this.boekConfig = boekConfig;
+        this.metaConfig = metaConfig;
     }
 
-    public BoekResponse getBooks(String key) {
+    public BoekResponse getBooks(String key, int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=special:all" +
                      apiConfig.getAuthorization() +
-                     key ;
-        Document doc = request.sendRequest(url);
-        BoekResponse response = new BoekResponse();
-        response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
+                     key +
+                     "&page=" +
+                     page ;
+        return sendResponse(url);
     }
 
 
-    public BoekResponse searchBook(String search_value, String key) {
+    public BoekResponse searchBook(String search_value, int page, String key) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                      "search/?q=" +
                      query +
                      apiConfig.getAuthorization() +
-                     key ;
-        Document doc = request.sendRequest(url);
-        BoekResponse response = new BoekResponse();
-        response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
+                     key +
+                     "&page=" +
+                     page ;
+        return sendResponse(url);
     }
 
-    public BoekResponse getLargetypeBooks() {
+    public BoekResponse getLargetypeBooks(int page) {
         String key = "&refine=true&facet=type(largetype)";
-        return getBooks(key);
+        return getBooks(key, page);
     }
-    public BoekResponse searchLargetypeBook(String search_value) {
+    public BoekResponse searchLargetypeBook(String search_value, int page) {
         String key = "&refine=true&facet=type(largetype)";
-        return searchBook(search_value, key);
+        return searchBook(search_value, page, key);
     }
 
 
@@ -85,27 +81,37 @@ public class BookService {
         return res;
     }
 
-    public List<Boek> getCategory(String categorie_naam) {
+    public BoekResponse getCategory(String categorie_naam, int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=classification:" +
                      categorie_naam +
-                     apiConfig.getAuthorization();
-        Document doc = request.sendRequest(url);
-        return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page;
+        return sendResponse(url);
     }
 
-    public List<Boek> SearchInsideCategory(String categorie_naam, String search_value) {
+    public BoekResponse SearchInsideCategory(String categorie_naam, String search_value, int page) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                      "search/?q=classification:" +
                      categorie_naam +
                      "%20" +
                      query +
-                     apiConfig.getAuthorization();
-        Document doc = request.sendRequest(url);
-        return boekConfig.resultsToJson(doc.getElementsByTagName("result"));
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page;
+       return sendResponse(url);
     }
 
+
+    public static BoekResponse sendResponse(String url) {
+        Document doc = request.sendRequest(url);
+        BoekResponse response = new BoekResponse();
+        response.setBoeken(boekConfig.resultsToJson(doc.getElementsByTagName("result")));
+        response.setMeta(metaConfig.resultsToJson(doc.getElementsByTagName("meta")));
+        return response;
+    }
 
 }
 

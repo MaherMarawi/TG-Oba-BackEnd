@@ -21,11 +21,21 @@ public class CourseController {
 
     @GetMapping("")
     public CursusResponse getCourses() {
-        return courseService.getCourses();
+        return courseService.getCourses(1);
+    }
+
+    @GetMapping("/page/{page}")
+    public CursusResponse getCourses(@PathVariable int page) {
+        return courseService.getCourses(page);
     }
 
     @GetMapping("/{search_value}")
     public CursusResponse searchCourse(@PathVariable String search_value) {
-        return courseService.searchCourse(search_value);
+        return courseService.searchCourse(search_value, 1);
+    }
+
+    @GetMapping("/{search_value}/page/{page}")
+    public CursusResponse searchCourse(@PathVariable String search_value, @PathVariable int page) {
+        return courseService.searchCourse(search_value, page);
     }
 }

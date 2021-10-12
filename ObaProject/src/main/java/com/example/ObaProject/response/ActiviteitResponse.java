@@ -2,13 +2,14 @@ package com.example.ObaProject.response;
 
 import com.example.ObaProject.data.Activiteit;
 import com.example.ObaProject.data.Facet;
+import com.example.ObaProject.data.Meta;
 
 import java.util.List;
 
 public class ActiviteitResponse {
 
+    private Meta meta;
     private List<Activiteit> activiteiten;
-    private Facet facet;
 
     public ActiviteitResponse() {
     }
@@ -21,11 +22,11 @@ public class ActiviteitResponse {
         this.activiteiten = activiteiten;
     }
 
-    public Facet getFacet() {
-        return facet;
+    public Meta getMeta() {
+        return meta;
     }
 
-    public void setFacet(Facet facet) {
-        this.facet = facet;
+    public void setMeta(Meta meta) {
+        this.meta = meta;
     }
 }

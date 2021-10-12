@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Result {
 
-    private int id;
+    private String id;
     private String genre;
     private String title;
     private String beschrijving;
@@ -12,12 +12,9 @@ public class Result {
     private String[] omslagafbeeldingen;
     private String locatie;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-
-
-
     public String getTitle() {
         return title;
     }
@@ -37,7 +34,7 @@ public class Result {
         return genre;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public void setGenre(String genre) {
@@ -70,7 +67,6 @@ public class Result {
         str2 = (String[]) strResult.toArray(str2);
         return str2;
     }
-
 
     public static String getString(String str) {
         String strReplace = str.trim().replaceAll("\n", "");

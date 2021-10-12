@@ -13,49 +13,50 @@ public class CourseService {
 
     private final ApiConfig apiConfig;
     private final QueryArrange queryArrange;
-    private final FacetConfig facetConfig;
-    private final GetRequest request;
-    private final CursusConfig cursusConfig;
+    private static MetaConfig metaConfig;
+    private static GetRequest request;
+    private static CursusConfig cursusConfig;
 
     @Autowired
     public CourseService(ApiConfig apiConfig,
-                      QueryArrange queryArrange,
-                      FacetConfig facetConfig,
-                      CursusConfig cursusConfig,
-                      GetRequest request) {
+                         QueryArrange queryArrange,
+                         MetaConfig metaConfig,
+                         CursusConfig cursusConfig,
+                         GetRequest request) {
         this.apiConfig = apiConfig;
         this.queryArrange = queryArrange;
-        this.facetConfig = facetConfig;
         this.request = request;
         this.cursusConfig = cursusConfig;
+        this.metaConfig = metaConfig;
     }
 
-    public CursusResponse getCourses() {
+    public CursusResponse getCourses(int page) {
         String url = apiConfig.getUrl() +
-                "search/?q=table:jsonsrc" +
-                apiConfig.getAuthorization() +
-                "&refine=true" +
-                apiConfig.getSort();
-        Document doc = request.sendRequest(url);
-        CursusResponse response = new CursusResponse();
-        response.setCursussen(cursusConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        return response;
+                     "search/?q=table:jsonsrc" +
+                     apiConfig.getAuthorization() +
+                     "&refine=true" +
+                     apiConfig.getSort() +
+                     "&page=" +
+                     page;
+        return sendResponse(url);
     }
 
-    public CursusResponse searchCourse(String search_value) {
+    public CursusResponse searchCourse(String search_value, int page) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
-                "search/?q=table:jsonsrc%20" +
-                query +
-                apiConfig.getAuthorization() +
-                "&refine=true";
+                     "search/?q=table:jsonsrc%20" +
+                     query +
+                     apiConfig.getAuthorization() +
+                     "&refine=true" +
+                     "&page=" +
+                     page;
+        return sendResponse(url);
+    }
+    public static CursusResponse sendResponse(String url) {
         Document doc = request.sendRequest(url);
         CursusResponse response = new CursusResponse();
         response.setCursussen(cursusConfig.resultsToJson(doc.getElementsByTagName("result")));
-        response.setFacet(facetConfig.resultsToJson(doc.getElementsByTagName("facet")));
-        System.out.println(response.getCursussen().size());
+        response.setMeta(metaConfig.resultsToJson(doc.getElementsByTagName("meta")));
         return response;
     }
-
 }

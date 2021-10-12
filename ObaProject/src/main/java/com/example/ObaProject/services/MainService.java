@@ -19,18 +19,18 @@ public class MainService {
         this.courseService = courseService;
         this.bookService = bookService;
     }
-    public MainResponse search(String search_value) {
+    public MainResponse search(String search_value, int page) {
         MainResponse response = new MainResponse();
-        response.setActiviteiten(activityService.searchActivity(search_value));
-        response.setBoeken(bookService.searchBook(search_value, "&refine=true"));
-        response.setCursussen(courseService.searchCourse(search_value));
+        response.setActiviteiten(activityService.searchActivity(search_value, page));
+        response.setBoeken(bookService.searchBook(search_value, page, "&refine=true"));
+        response.setCursussen(courseService.searchCourse(search_value, page));
         return response;
     }
 
-    public Samen activiteit_cursus() {
+    public Samen activiteit_cursus(int page) {
         Samen samen = new Samen();
-        samen.setActiviteiten(activityService.getActivities());
-        samen.setCursussen(courseService.getCourses());
+        samen.setActiviteiten(activityService.getActivities(page));
+        samen.setCursussen(courseService.getCourses(page));
         return samen;
     }
 }

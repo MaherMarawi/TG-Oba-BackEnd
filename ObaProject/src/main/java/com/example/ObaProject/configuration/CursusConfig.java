@@ -28,6 +28,7 @@ public class CursusConfig {
     }
     public Cursus getCursus(Element eElement) {
         Cursus cursus = new Cursus();
+        cursus.setId(getId(eElement));
         cursus.setBeschrijving(checkValue(eElement, "summaries") ? eElement.getElementsByTagName("summaries").item(0).getTextContent() : "");
         cursus.setGenre(checkValue(eElement, "format") ? eElement.getElementsByTagName("format").item(0).getTextContent() : "");
         cursus.setTitle(checkValue(eElement, "title") ? eElement.getElementsByTagName("title").item(0).getTextContent() : "");
@@ -42,5 +43,10 @@ public class CursusConfig {
     public static boolean checkValue(Element e, String attr) {
         Optional<Node> opt = Optional.ofNullable(e.getElementsByTagName(attr).item(0));
         return opt.isPresent();
+    }
+    public static String getId(Element e) {
+        NodeList n = checkValue(e, "id") ? e.getElementsByTagName("id") : null;
+        Element eE = (Element) n.item(0);
+        return eE.getAttribute("nativeid");
     }
 }

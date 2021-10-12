@@ -23,20 +23,42 @@ public class BookController {
 
     @GetMapping("")
     public BoekResponse getBooks() {
-        return bookService.getBooks("&refine=true");
+        return bookService.getBooks("&refine=true", 1);
     }
-    @GetMapping("/largetype")
-    public BoekResponse getLargetypeBooks() {
-        return bookService.getLargetypeBooks();
+
+    @GetMapping("/page/{page}")
+    public BoekResponse getBooks(@PathVariable int page) {
+        return bookService.getBooks("&refine=true", page);
     }
 
     @GetMapping("/{search_value}")
     public BoekResponse searchBook(@PathVariable String search_value) {
-        return bookService.searchBook(search_value, "&refine=true");
+        return bookService.searchBook(search_value, 1, "&refine=true");
     }
+
+    @GetMapping("/{search_value}/page/{page}")
+    public BoekResponse searchBook(@PathVariable String search_value, @PathVariable int page) {
+        return bookService.searchBook(search_value, page, "&refine=true");
+    }
+
+    @GetMapping("/largetype")
+    public BoekResponse getLargetypeBooks() {
+        return bookService.getLargetypeBooks(1);
+    }
+
+    @GetMapping("/largetype/page/{page}")
+    public BoekResponse getLargetypeBooks(@PathVariable int page) {
+        return bookService.getLargetypeBooks(page);
+    }
+
     @GetMapping("/largetype/{search_value}")
     public BoekResponse searchLargetypeBook(@PathVariable String search_value) {
-        return bookService.searchLargetypeBook(search_value);
+        return bookService.searchLargetypeBook(search_value, 1);
+    }
+
+    @GetMapping("/largetype/{search_value}/page/{page}")
+    public BoekResponse searchLargetypeBook(@PathVariable String search_value, @PathVariable int page) {
+        return bookService.searchLargetypeBook(search_value, page);
     }
 
     @GetMapping("/categorieen")
@@ -45,12 +67,22 @@ public class BookController {
     }
 
     @GetMapping("/categorieen/{categorie_naam}")
-    public List<Boek> getCategory(@PathVariable String categorie_naam) {
-        return bookService.getCategory(categorie_naam);
+    public BoekResponse getCategory(@PathVariable String categorie_naam) {
+        return bookService.getCategory(categorie_naam, 1);
+    }
+
+    @GetMapping("/categorieen/{categorie_naam}/page/{page}")
+    public BoekResponse getCategory(@PathVariable String categorie_naam, @PathVariable int page) {
+        return bookService.getCategory(categorie_naam, page);
     }
 
     @GetMapping("/categorieen/{categorie_naam}/{search_value}")
-    public List<Boek> SearchInsideCategory(@PathVariable String categorie_naam, @PathVariable String search_value) {
-        return bookService.SearchInsideCategory(categorie_naam, search_value);
+    public BoekResponse SearchInsideCategory(@PathVariable String categorie_naam, @PathVariable String search_value) {
+        return bookService.SearchInsideCategory(categorie_naam, search_value, 1);
+    }
+
+    @GetMapping("/categorieen/{categorie_naam}/{search_value}/page/{page}")
+    public BoekResponse SearchInsideCategory(@PathVariable String categorie_naam, @PathVariable String search_value, @PathVariable int page) {
+        return bookService.SearchInsideCategory(categorie_naam, search_value, page);
     }
 }

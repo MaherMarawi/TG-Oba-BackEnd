@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import javax.xml.stream.events.EndElement;
 import java.util.*;
 
 @Configuration
@@ -21,7 +19,7 @@ public class BoekConfig {
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
                 Element eElement = (Element) node;
-                String genre = checkValue(eElement, "format") ? eElement.getElementsByTagName("format").item(0).getTextContent() : "";
+//                String genre = checkValue(eElement, "format") ? eElement.getElementsByTagName("format").item(0).getTextContent() : "";
 //                if (!genre.equals("Activiteiten") && !genre.equals("Cursus")) {
                     boeken.add(getBoek(eElement));
 //                }
@@ -33,7 +31,6 @@ public class BoekConfig {
         Boek boek = new Boek();
         boek.setId(getId(eElement));
         boek.setBeschrijving(checkValue(eElement, "summaries") ? eElement.getElementsByTagName("summaries").item(0).getTextContent() : "");
-
         boek.setSubtitle(checkValue(eElement, "subtitle") ? eElement.getElementsByTagName("subtitle").item(0).getTextContent() : "");
         boek.setTitle(getTitle(boek.getSubtitle(), eElement));
         boek.setDetailPagina(checkValue(eElement, "detail-page") ? eElement.getElementsByTagName("detail-page").item(0).getTextContent() : "");
@@ -54,10 +51,10 @@ public class BoekConfig {
         Optional<Node> opt = Optional.ofNullable(e.getElementsByTagName(attr).item(0));
         return opt.isPresent();
     }
-    public static int getId(Element e) {
+    public static String getId(Element e) {
         NodeList n = checkValue(e, "id") ? e.getElementsByTagName("id") : null;
         Element eE = (Element) n.item(0);
-        return Integer.parseInt(eE.getAttribute("nativeid"));
+        return eE.getAttribute("nativeid");
     }
     public static String getTitle(String subtitle, Element e) {
         String title = checkValue(e, "short-title") ? e.getElementsByTagName("short-title").item(0).getTextContent() : "";

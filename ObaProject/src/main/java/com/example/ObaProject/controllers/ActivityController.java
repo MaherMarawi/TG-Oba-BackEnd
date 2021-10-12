@@ -21,15 +21,31 @@ public class ActivityController {
 
     @GetMapping("")
     public ActiviteitResponse getActivities() {
-        return activityService.getActivities();
+        return activityService.getActivities(1);
+    }
+
+    @GetMapping("/page/{page}")
+    public ActiviteitResponse getActivities(@PathVariable int page) {
+        return activityService.getActivities(page);
     }
 
     @GetMapping("/{search_value}")
     public ActiviteitResponse searchActivity(@PathVariable String search_value) {
-        return activityService.searchActivity(search_value);
+        return activityService.searchActivity(search_value, 1);
     }
+
+    @GetMapping("/{search_value}/page/{page}")
+    public ActiviteitResponse searchActivity(@PathVariable String search_value, @PathVariable int page) {
+        return activityService.searchActivity(search_value, page);
+    }
+
     @GetMapping("/wijk/{wijk_naam}")
     public ActiviteitResponse getActivitiesInLocation(@PathVariable String wijk_naam) {
-        return activityService.getActivitiesInLocation(wijk_naam);
+        return activityService.getActivitiesInLocation(wijk_naam, 1);
+    }
+
+    @GetMapping("/wijk/{wijk_naam}/page/{page}")
+    public ActiviteitResponse getActivitiesInLocation(@PathVariable String wijk_naam, @PathVariable int page) {
+        return activityService.getActivitiesInLocation(wijk_naam, page);
     }
 }
