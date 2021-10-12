@@ -42,6 +42,7 @@ public class BoekConfig {
         boek.setUitgever(checkValue(eElement, "publisher") ? eElement.getElementsByTagName("publisher").item(0).getTextContent() : "");
         boek.setTaal(checkValue(eElement, "language") ? eElement.getElementsByTagName("language").item(0).getTextContent() : "");
         boek.setAuteurs(checkValue(eElement, "authors") ? eElement.getElementsByTagName("authors").item(0).getTextContent() : "");
+        boek.setTopical_subjects(checkValue(eElement, "subjects") ? eElement.getElementsByTagName("subjects").item(0).getTextContent() : "");
         return boek;
     }
     public static boolean checkValue(Element e, String attr) {

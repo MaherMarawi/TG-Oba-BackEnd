@@ -10,11 +10,19 @@ public class Boek extends Result {
     private String taal;
     private String doelgroep;
     private String series;
+    private String[] topical_subjects;
 
     public Boek() {
     }
 
 
+    public String[] getTopical_subjects() {
+        return topical_subjects;
+    }
+
+    public void setTopical_subjects(String topical_subjects) {
+        this.topical_subjects = getArray(topical_subjects);
+    }
 
     public String[] getAuteurs() {
         return auteurs;
