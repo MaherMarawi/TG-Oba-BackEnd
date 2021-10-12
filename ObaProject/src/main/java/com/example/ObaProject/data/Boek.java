@@ -12,12 +12,21 @@ public class Boek extends Result {
     private String series;
     private String[] topical_subjects;
     private String subtitle;
+    private String[] collaborators;
 
     public Boek() {
     }
 
     public String getSubtitle() {
         return subtitle;
+    }
+
+    public String[] getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(String collaborators) {
+        this.collaborators = getArray(collaborators);
     }
 
     public void setSubtitle(String subtitle) {
