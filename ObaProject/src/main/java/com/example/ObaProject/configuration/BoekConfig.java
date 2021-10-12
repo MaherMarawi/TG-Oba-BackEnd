@@ -45,7 +45,7 @@ public class BoekConfig {
         boek.setSeries(checkValue(eElement, "series-title") ? eElement.getElementsByTagName("series-title").item(0).getTextContent() : "");
         boek.setUitgever(checkValue(eElement, "publisher") ? eElement.getElementsByTagName("publisher").item(0).getTextContent() : "");
         boek.setTaal(checkValue(eElement, "language") ? eElement.getElementsByTagName("language").item(0).getTextContent() : "");
-        boek.setAuteurs(checkValue(eElement, "authors") ? eElement.getElementsByTagName("authors").item(0).getTextContent() : "");
+        boek.setAuteurs(checkValue(eElement, "main-author") ? eElement.getElementsByTagName("main-author").item(0).getTextContent() : "");
         boek.setTopical_subjects(checkValue(eElement, "subjects") ? eElement.getElementsByTagName("subjects").item(0).getTextContent() : "");
         return boek;
     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Boek extends Result {
 
-    private String[] auteurs;
+    private String auteurs;
     private String uitgave_jaar;
     private String uitgever;
     private String taal;
@@ -32,12 +32,12 @@ public class Boek extends Result {
         this.topical_subjects = getArray(topical_subjects);
     }
 
-    public String[] getAuteurs() {
+    public String getAuteurs() {
         return auteurs;
     }
 
     public void setAuteurs(String auteurs) {
-        this.auteurs = getArray(auteurs);
+        this.auteurs = auteurs;
     }
 
     public String getUitgave_jaar() {
