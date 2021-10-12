@@ -11,10 +11,18 @@ public class Boek extends Result {
     private String doelgroep;
     private String series;
     private String[] topical_subjects;
+    private String subtitle;
 
     public Boek() {
     }
 
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
 
     public String[] getTopical_subjects() {
         return topical_subjects;

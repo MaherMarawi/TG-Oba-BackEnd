@@ -5,14 +5,15 @@ import org.springframework.context.annotation.Configuration;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
+import javax.xml.stream.events.EndElement;
+import java.util.*;
 
 @Configuration
 public class BoekConfig {
 
     public List<Boek> resultsToJson(NodeList list) {
+
         List<Boek> boeken = new ArrayList<>();
         for (int itr = 0; itr < list.getLength(); itr++)
         {
@@ -30,8 +31,11 @@ public class BoekConfig {
     }
     public Boek getBoek(Element eElement) {
         Boek boek = new Boek();
+        boek.setId(getId(eElement));
         boek.setBeschrijving(checkValue(eElement, "summaries") ? eElement.getElementsByTagName("summaries").item(0).getTextContent() : "");
-        boek.setTitle(checkValue(eElement, "title") ? eElement.getElementsByTagName("title").item(0).getTextContent() : "");
+
+        boek.setSubtitle(checkValue(eElement, "subtitle") ? eElement.getElementsByTagName("subtitle").item(0).getTextContent() : "");
+        boek.setTitle(getTitle(boek.getSubtitle(), eElement));
         boek.setDetailPagina(checkValue(eElement, "detail-page") ? eElement.getElementsByTagName("detail-page").item(0).getTextContent() : "");
         boek.setOmslagafbeeldingen(checkValue(eElement, "coverimages") ? eElement.getElementsByTagName("coverimages").item(0).getTextContent() : "");
         boek.setLocatie(checkValue(eElement, "activity-location") ? eElement.getElementsByTagName("activity-location").item(0).getTextContent() : "");
@@ -48,5 +52,21 @@ public class BoekConfig {
     public static boolean checkValue(Element e, String attr) {
         Optional<Node> opt = Optional.ofNullable(e.getElementsByTagName(attr).item(0));
         return opt.isPresent();
+    }
+    public static int getId(Element e) {
+        NodeList n = checkValue(e, "id") ? e.getElementsByTagName("id") : null;
+        Element eE = (Element) n.item(0);
+        return Integer.parseInt(eE.getAttribute("nativeid"));
+    }
+    public static String getTitle(String subtitle, Element e) {
+        String title = checkValue(e, "short-title") ? e.getElementsByTagName("short-title").item(0).getTextContent() : "";
+        if (!title.equals("") && !subtitle.equals("")) {
+            Collection titleArray = new ArrayList(Arrays.asList(title.split(" ")));
+            List subtitleArray = Arrays.asList(subtitle.split(" "));
+            titleArray.removeAll(subtitleArray);
+            String listString = String.join(",", titleArray).replaceAll(",", " ");
+            return listString.replaceAll(":", "");
+        }
+        return title;
     }
 }

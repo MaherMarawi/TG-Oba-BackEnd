@@ -4,12 +4,18 @@ import java.util.ArrayList;
 
 public class Result {
 
+    private int id;
     private String genre;
     private String title;
     private String beschrijving;
     private String detailPagina;
     private String[] omslagafbeeldingen;
     private String locatie;
+
+    public int getId() {
+        return id;
+    }
+
 
 
     public String getTitle() {
@@ -31,6 +37,9 @@ public class Result {
         return genre;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setGenre(String genre) {
         this.genre = genre;
     }
