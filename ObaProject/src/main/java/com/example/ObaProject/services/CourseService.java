@@ -3,6 +3,8 @@ package com.example.ObaProject.services;
 import com.example.ObaProject.api.GetRequest;
 import com.example.ObaProject.api.QueryArrange;
 import com.example.ObaProject.configuration.*;
+import com.example.ObaProject.response.ComprehensiveBookResponse;
+import com.example.ObaProject.response.ComprehensiveCursusResponse;
 import com.example.ObaProject.response.CursusResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class CourseService {
         this.metaConfig = metaConfig;
     }
 
-    public CursusResponse getCourses(int page) {
+    public ComprehensiveCursusResponse getCourses(int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=table:jsonsrc" +
                      apiConfig.getAuthorization() +
@@ -38,10 +40,10 @@ public class CourseService {
                      apiConfig.getSort() +
                      "&page=" +
                      page;
-        return sendResponse(url);
+        return fetchAllData(url);
     }
 
-    public CursusResponse searchCourse(String search_value, int page) {
+    public ComprehensiveCursusResponse searchCourse(String search_value, int page) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                      "search/?q=table:jsonsrc%20" +
@@ -50,7 +52,16 @@ public class CourseService {
                      "&refine=true" +
                      "&page=" +
                      page;
-        return sendResponse(url);
+        return fetchAllData(url);
+    }
+    public static ComprehensiveCursusResponse fetchAllData(String url) {
+        return new ComprehensiveCursusResponse(
+                sendResponse(url + "&facet=Activiteiten(c_thisweek)"),
+                sendResponse(url + "&facet=Activiteiten(d_thismonth)"),
+                sendResponse(url + "&facet=Activiteiten(e_nextmonth)"),
+                sendResponse(url + "&facet=Activiteiten(f_next3month)"),
+                sendResponse(url + "&facet=Activiteiten(g_thisyear)")
+        );
     }
     public static CursusResponse sendResponse(String url) {
         Document doc = request.sendRequest(url);

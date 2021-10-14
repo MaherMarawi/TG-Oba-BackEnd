@@ -3,8 +3,8 @@ package com.example.ObaProject.services;
 import com.example.ObaProject.api.GetRequest;
 import com.example.ObaProject.api.QueryArrange;
 import com.example.ObaProject.configuration.*;
-import com.example.ObaProject.data.Boek;
 import com.example.ObaProject.response.BoekResponse;
+import com.example.ObaProject.response.ComprehensiveBookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -21,6 +21,7 @@ public class BookService {
     private static GetRequest request;
     private static BoekConfig boekConfig;
     private static MetaConfig metaConfig;
+    private final String largetype = "largetype";
 
     @Autowired
     public BookService(ApiConfig apiConfig,
@@ -35,18 +36,24 @@ public class BookService {
         this.metaConfig = metaConfig;
     }
 
-    public BoekResponse getBooks(String key, int page) {
+
+    public ComprehensiveBookResponse getBooks(String key, int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=special:all" +
                      apiConfig.getAuthorization() +
                      key +
                      "&page=" +
                      page ;
-        return sendResponse(url);
+        return fetchAllData(url);
+    }
+
+    public ComprehensiveBookResponse getAllBooks(String link, String str) {
+        String url = link + str;
+        return fetchAllData(url);
     }
 
 
-    public BoekResponse searchBook(String search_value, int page, String key) {
+    public ComprehensiveBookResponse searchBook(String search_value, int page, String key) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                      "search/?q=" +
@@ -55,16 +62,30 @@ public class BookService {
                      key +
                      "&page=" +
                      page ;
-        return sendResponse(url);
+        return fetchAllData(url);
     }
 
     public BoekResponse getLargetypeBooks(int page) {
         String key = "&refine=true&facet=type(largetype)";
-        return getBooks(key, page);
+        String url = apiConfig.getUrl() +
+                     "search/?q=special:all" +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key;
+        return sendResponse(url);
     }
     public BoekResponse searchLargetypeBook(String search_value, int page) {
         String key = "&refine=true&facet=type(largetype)";
-        return searchBook(search_value, page, key);
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                     "search/?q=" +
+                     query +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key;
+        return sendResponse(url);
     }
 
 
@@ -81,17 +102,17 @@ public class BookService {
         return res;
     }
 
-    public BoekResponse getCategory(String categorie_naam, int page) {
+    public ComprehensiveBookResponse getCategory(String categorie_naam, int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=classification:" +
                      categorie_naam +
                      apiConfig.getAuthorization() +
                      "&page=" +
                      page;
-        return sendResponse(url);
+        return fetchAllData(url);
     }
 
-    public BoekResponse SearchInsideCategory(String categorie_naam, String search_value, int page) {
+    public ComprehensiveBookResponse SearchInsideCategory(String categorie_naam, String search_value, int page) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                      "search/?q=classification:" +
@@ -101,9 +122,18 @@ public class BookService {
                      apiConfig.getAuthorization() +
                      "&page=" +
                      page;
-       return sendResponse(url);
+       return fetchAllData(url);
     }
 
+    public static ComprehensiveBookResponse fetchAllData(String url) {
+        return new ComprehensiveBookResponse(
+                sendResponse(url + "&facet=type(largetype)"),
+                sendResponse(url + "&facet=type(audiobook)"),
+                sendResponse(url + "&facet=type(ebook)"),
+                sendResponse(url + "&facet=type(book)"),
+                sendResponse(url + "&facet=type(movie)")
+        );
+    }
 
     public static BoekResponse sendResponse(String url) {
         Document doc = request.sendRequest(url);

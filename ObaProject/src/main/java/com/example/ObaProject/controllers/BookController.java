@@ -1,7 +1,7 @@
 package com.example.ObaProject.controllers;
 
-import com.example.ObaProject.data.Boek;
 import com.example.ObaProject.response.BoekResponse;
+import com.example.ObaProject.response.ComprehensiveBookResponse;
 import com.example.ObaProject.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,24 +22,25 @@ public class BookController {
     }
 
     @GetMapping("")
-    public BoekResponse getBooks() {
+    public ComprehensiveBookResponse getBooks() {
         return bookService.getBooks("&refine=true", 1);
     }
 
     @GetMapping("/page/{page}")
-    public BoekResponse getBooks(@PathVariable int page) {
+    public ComprehensiveBookResponse getBooks(@PathVariable int page) {
         return bookService.getBooks("&refine=true", page);
     }
 
     @GetMapping("/{search_value}")
-    public BoekResponse searchBook(@PathVariable String search_value) {
+    public ComprehensiveBookResponse searchBook(@PathVariable String search_value) {
         return bookService.searchBook(search_value, 1, "&refine=true");
     }
 
     @GetMapping("/{search_value}/page/{page}")
-    public BoekResponse searchBook(@PathVariable String search_value, @PathVariable int page) {
+    public ComprehensiveBookResponse searchBook(@PathVariable String search_value, @PathVariable int page) {
         return bookService.searchBook(search_value, page, "&refine=true");
     }
+
 
     @GetMapping("/largetype")
     public BoekResponse getLargetypeBooks() {
@@ -67,22 +68,22 @@ public class BookController {
     }
 
     @GetMapping("/categorieen/{categorie_naam}")
-    public BoekResponse getCategory(@PathVariable String categorie_naam) {
+    public ComprehensiveBookResponse getCategory(@PathVariable String categorie_naam) {
         return bookService.getCategory(categorie_naam, 1);
     }
 
     @GetMapping("/categorieen/{categorie_naam}/page/{page}")
-    public BoekResponse getCategory(@PathVariable String categorie_naam, @PathVariable int page) {
+    public ComprehensiveBookResponse getCategory(@PathVariable String categorie_naam, @PathVariable int page) {
         return bookService.getCategory(categorie_naam, page);
     }
 
     @GetMapping("/categorieen/{categorie_naam}/{search_value}")
-    public BoekResponse SearchInsideCategory(@PathVariable String categorie_naam, @PathVariable String search_value) {
+    public ComprehensiveBookResponse SearchInsideCategory(@PathVariable String categorie_naam, @PathVariable String search_value) {
         return bookService.SearchInsideCategory(categorie_naam, search_value, 1);
     }
 
     @GetMapping("/categorieen/{categorie_naam}/{search_value}/page/{page}")
-    public BoekResponse SearchInsideCategory(@PathVariable String categorie_naam, @PathVariable String search_value, @PathVariable int page) {
+    public ComprehensiveBookResponse SearchInsideCategory(@PathVariable String categorie_naam, @PathVariable String search_value, @PathVariable int page) {
         return bookService.SearchInsideCategory(categorie_naam, search_value, page);
     }
 }

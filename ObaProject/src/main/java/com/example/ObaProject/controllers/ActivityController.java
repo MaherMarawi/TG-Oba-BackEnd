@@ -1,6 +1,7 @@
 package com.example.ObaProject.controllers;
 
 import com.example.ObaProject.response.ActiviteitResponse;
+import com.example.ObaProject.response.ComprehensiveActivityResponse;
 import com.example.ObaProject.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,32 +21,32 @@ public class ActivityController {
     }
 
     @GetMapping("")
-    public ActiviteitResponse getActivities() {
+    public ComprehensiveActivityResponse getActivities() {
         return activityService.getActivities(1);
     }
 
     @GetMapping("/page/{page}")
-    public ActiviteitResponse getActivities(@PathVariable int page) {
+    public ComprehensiveActivityResponse getActivities(@PathVariable int page) {
         return activityService.getActivities(page);
     }
 
     @GetMapping("/{search_value}")
-    public ActiviteitResponse searchActivity(@PathVariable String search_value) {
+    public ComprehensiveActivityResponse searchActivity(@PathVariable String search_value) {
         return activityService.searchActivity(search_value, 1);
     }
 
     @GetMapping("/{search_value}/page/{page}")
-    public ActiviteitResponse searchActivity(@PathVariable String search_value, @PathVariable int page) {
+    public ComprehensiveActivityResponse searchActivity(@PathVariable String search_value, @PathVariable int page) {
         return activityService.searchActivity(search_value, page);
     }
 
     @GetMapping("/wijk/{wijk_naam}")
-    public ActiviteitResponse getActivitiesInLocation(@PathVariable String wijk_naam) {
+    public ComprehensiveActivityResponse getActivitiesInLocation(@PathVariable String wijk_naam) {
         return activityService.getActivitiesInLocation(wijk_naam, 1);
     }
 
     @GetMapping("/wijk/{wijk_naam}/page/{page}")
-    public ActiviteitResponse getActivitiesInLocation(@PathVariable String wijk_naam, @PathVariable int page) {
+    public ComprehensiveActivityResponse getActivitiesInLocation(@PathVariable String wijk_naam, @PathVariable int page) {
         return activityService.getActivitiesInLocation(wijk_naam, page);
     }
 }

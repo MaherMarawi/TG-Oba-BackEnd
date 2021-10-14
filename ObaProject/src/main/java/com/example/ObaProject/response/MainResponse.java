@@ -2,35 +2,35 @@ package com.example.ObaProject.response;
 
 public class MainResponse {
 
-    private BoekResponse boeken;
-    private ActiviteitResponse activiteiten;
-    private CursusResponse cursussen;
+    private ComprehensiveBookResponse boeken;
+    private ComprehensiveActivityResponse activiteiten;
+    private ComprehensiveCursusResponse cursussen;
 
     public MainResponse() {
     }
 
 
-    public BoekResponse getBoeken() {
+    public ComprehensiveBookResponse getBoeken() {
         return boeken;
     }
 
-    public void setBoeken(BoekResponse boeken) {
+    public void setBoeken(ComprehensiveBookResponse boeken) {
         this.boeken = boeken;
     }
 
-    public ActiviteitResponse getActiviteiten() {
+    public ComprehensiveActivityResponse getActiviteiten() {
         return activiteiten;
     }
 
-    public void setActiviteiten(ActiviteitResponse activiteiten) {
+    public void setActiviteiten(ComprehensiveActivityResponse activiteiten) {
         this.activiteiten = activiteiten;
     }
 
-    public CursusResponse getCursussen() {
+    public ComprehensiveCursusResponse getCursussen() {
         return cursussen;
     }
 
-    public void setCursussen(CursusResponse cursussen) {
+    public void setCursussen(ComprehensiveCursusResponse cursussen) {
         this.cursussen = cursussen;
     }
 }

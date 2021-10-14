@@ -4,7 +4,7 @@ import com.example.ObaProject.api.GetRequest;
 import com.example.ObaProject.api.QueryArrange;
 import com.example.ObaProject.configuration.*;
 import com.example.ObaProject.response.ActiviteitResponse;
-import com.example.ObaProject.response.BoekResponse;
+import com.example.ObaProject.response.ComprehensiveActivityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -30,7 +30,7 @@ public class ActivityService {
         this.activiteitConfig = activiteitConfig;
         this.metaConfig = metaConfig;
     }
-    public ActiviteitResponse getActivities(int page) {
+    public ComprehensiveActivityResponse getActivities(int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=table:activiteiten" +
                      apiConfig.getAuthorization() +
@@ -38,10 +38,10 @@ public class ActivityService {
                      apiConfig.getSort() +
                      "&page=" +
                      page;
-        return sendResponse(url);
+        return fetchAllData(url);
 
     }
-    public ActiviteitResponse searchActivity(String search_value, int page) {
+    public ComprehensiveActivityResponse searchActivity(String search_value, int page) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                      "search/?q=table:activiteiten%20" +
@@ -50,10 +50,10 @@ public class ActivityService {
                      "&refine=true"+
                      "&page=" +
                      page;
-        return sendResponse(url);
+        return fetchAllData(url);
     }
 
-    public ActiviteitResponse getActivitiesInLocation(String wijk_naam, int page) {
+    public ComprehensiveActivityResponse getActivitiesInLocation(String wijk_naam, int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=table:activiteiten" +
                      apiConfig.getAuthorization() +
@@ -63,7 +63,17 @@ public class ActivityService {
                      wijk_naam +
                      "&page=" +
                      page;
-        return sendResponse(url);
+        return fetchAllData(url);
+    }
+
+    public static ComprehensiveActivityResponse fetchAllData(String url) {
+        return new ComprehensiveActivityResponse(
+                sendResponse(url + "&facet=Activiteiten(c_nextweek)"),
+                sendResponse(url + "&facet=Activiteiten(d_thismonth)"),
+                sendResponse(url + "&facet=Activiteiten(e_nextmonth)"),
+                sendResponse(url + "&facet=Activiteiten(f_next3month)"),
+                sendResponse(url + "&facet=Activiteiten(g_thisyear)")
+        );
     }
 
     public static ActiviteitResponse sendResponse(String url) {

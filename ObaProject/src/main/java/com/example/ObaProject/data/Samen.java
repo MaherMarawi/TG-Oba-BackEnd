@@ -1,26 +1,28 @@
 package com.example.ObaProject.data;
 
 import com.example.ObaProject.response.ActiviteitResponse;
+import com.example.ObaProject.response.ComprehensiveActivityResponse;
+import com.example.ObaProject.response.ComprehensiveCursusResponse;
 import com.example.ObaProject.response.CursusResponse;
 
 public class Samen {
 
-    private ActiviteitResponse activiteiten;
-    private CursusResponse cursussen;
+    private ComprehensiveActivityResponse activiteiten;
+    private ComprehensiveCursusResponse cursussen;
 
-    public ActiviteitResponse getActiviteiten() {
+    public ComprehensiveActivityResponse getActiviteiten() {
         return activiteiten;
     }
 
-    public void setActiviteiten(ActiviteitResponse activiteiten) {
+    public void setActiviteiten(ComprehensiveActivityResponse activiteiten) {
         this.activiteiten = activiteiten;
     }
 
-    public CursusResponse getCursussen() {
+    public ComprehensiveCursusResponse getCursussen() {
         return cursussen;
     }
 
-    public void setCursussen(CursusResponse cursussen) {
+    public void setCursussen(ComprehensiveCursusResponse cursussen) {
         this.cursussen = cursussen;
     }
 }
