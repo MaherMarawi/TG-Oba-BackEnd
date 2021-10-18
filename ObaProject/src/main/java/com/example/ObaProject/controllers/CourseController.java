@@ -39,4 +39,14 @@ public class CourseController {
     public ComprehensiveCursusResponse searchCourse(@PathVariable String search_value, @PathVariable int page) {
         return courseService.searchCourse(search_value, page);
     }
+
+    @GetMapping("/zoek/{search_value}")
+    public CursusResponse zoekCourse(@PathVariable String search_value) {
+        return courseService.zoekCourse(search_value, 1);
+    }
+
+    @GetMapping("/zoek/{search_value}/page/{page}")
+    public CursusResponse zoekCourse(@PathVariable String search_value, @PathVariable int page) {
+        return courseService.zoekCourse(search_value, page);
+    }
 }

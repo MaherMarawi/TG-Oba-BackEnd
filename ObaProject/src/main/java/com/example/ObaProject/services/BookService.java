@@ -66,6 +66,18 @@ public class BookService {
         return fetchAllData(url);
     }
 
+    public BoekResponse zoekBook(String search_value, int page, String key) {
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                "search/?q=" +
+                query +
+                apiConfig.getAuthorization() +
+                key +
+                "&page=" +
+                page ;
+        return sendResponse(url);
+    }
+
     // LARGETYPE BOOKS
 
     public BoekResponse getLargetypeBooks(int page) {

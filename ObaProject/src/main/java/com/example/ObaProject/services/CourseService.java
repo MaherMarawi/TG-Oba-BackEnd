@@ -54,6 +54,18 @@ public class CourseService {
                      page;
         return fetchAllData(url);
     }
+
+    public CursusResponse zoekCourse(String search_value, int page) {
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                "search/?q=table:jsonsrc%20" +
+                query +
+                apiConfig.getAuthorization() +
+                "&refine=true" +
+                "&page=" +
+                page;
+        return sendResponse(url);
+    }
     public static ComprehensiveCursusResponse fetchAllData(String url) {
         return new ComprehensiveCursusResponse(
                 sendResponse(url + "&facet=Activiteiten(c_thisweek)"),

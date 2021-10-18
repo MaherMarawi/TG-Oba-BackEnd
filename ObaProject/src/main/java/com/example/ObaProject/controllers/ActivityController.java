@@ -1,6 +1,7 @@
 package com.example.ObaProject.controllers;
 
 import com.example.ObaProject.response.ActiviteitResponse;
+import com.example.ObaProject.response.BoekResponse;
 import com.example.ObaProject.response.ComprehensiveActivityResponse;
 import com.example.ObaProject.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,16 @@ public class ActivityController {
     @GetMapping("/{search_value}/page/{page}")
     public ComprehensiveActivityResponse searchActivity(@PathVariable String search_value, @PathVariable int page) {
         return activityService.searchActivity(search_value, page);
+    }
+
+    @GetMapping("/zoek/{search_value}")
+    public ActiviteitResponse zoekActivity(@PathVariable String search_value) {
+        return activityService.zoekActivity(search_value, 1);
+    }
+
+    @GetMapping("/zoek/{search_value}/page/{page}")
+    public ActiviteitResponse zoekActivity(@PathVariable String search_value, @PathVariable int page) {
+        return activityService.zoekActivity(search_value, page);
     }
 
     @GetMapping("/wijk/{wijk_naam}")

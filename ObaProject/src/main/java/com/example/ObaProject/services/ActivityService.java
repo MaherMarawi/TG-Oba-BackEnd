@@ -4,6 +4,7 @@ import com.example.ObaProject.api.GetRequest;
 import com.example.ObaProject.api.QueryArrange;
 import com.example.ObaProject.configuration.*;
 import com.example.ObaProject.response.ActiviteitResponse;
+import com.example.ObaProject.response.BoekResponse;
 import com.example.ObaProject.response.ComprehensiveActivityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,17 @@ public class ActivityService {
                      "&page=" +
                      page;
         return fetchAllData(url);
+    }
+
+    public ActiviteitResponse zoekActivity(String search_value, int page) {
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                "search/?q=table:activiteiten%20" +
+                query +
+                apiConfig.getAuthorization() +
+                "&page=" +
+                page ;
+        return sendResponse(url);
     }
 
     public ComprehensiveActivityResponse getActivitiesInLocation(String wijk_naam, int page) {

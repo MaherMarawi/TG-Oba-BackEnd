@@ -7,7 +7,7 @@ public class ComprehensiveBookResponse {
     BoekResponse audio;
     BoekResponse ebook;
     BoekResponse book;
-    BoekResponse movie;
+    BoekResponse dvdvideo;
 
     public ComprehensiveBookResponse() {
     }
@@ -16,12 +16,12 @@ public class ComprehensiveBookResponse {
                                      BoekResponse audio,
                                      BoekResponse ebook,
                                      BoekResponse book,
-                                     BoekResponse movie) {
+                                     BoekResponse dvdvideo) {
         this.largetype = largetype;
         this.audio = audio;
         this.ebook = ebook;
         this.book = book;
-        this.movie = movie;
+        this.dvdvideo = dvdvideo;
     }
 
     public BoekResponse getLargetype() {
@@ -56,12 +56,12 @@ public class ComprehensiveBookResponse {
         this.book = book;
     }
 
-    public BoekResponse getMovie() {
-        return movie;
+    public BoekResponse getDvdvideo() {
+        return dvdvideo;
     }
 
-    public void setMovie(BoekResponse movie) {
-        this.movie = movie;
+    public void setDvdvideo(BoekResponse dvdvideo) {
+        this.dvdvideo = dvdvideo;
     }
 
 

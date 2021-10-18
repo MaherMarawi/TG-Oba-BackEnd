@@ -2,6 +2,7 @@ package com.example.ObaProject.services;
 
 import com.example.ObaProject.data.Samen;
 import com.example.ObaProject.response.MainResponse;
+import com.example.ObaProject.response.ZoekResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,15 @@ public class MainService {
         response.setCursussen(courseService.searchCourse(search_value, page));
         return response;
     }
+
+    public ZoekResponse zoek(String search_value, int page) {
+        ZoekResponse response = new ZoekResponse();
+        response.setActiviteiten(activityService.zoekActivity(search_value, page));
+        response.setBoeken(bookService.zoekBook(search_value, page, "&refine=true"));
+        response.setCursussen(courseService.zoekCourse(search_value, page));
+        return response;
+    }
+
 
     public Samen activiteit_cursus(int page) {
         Samen samen = new Samen();
