@@ -109,24 +109,24 @@ public class BookController {
 
     // MOVIES
 
-    @GetMapping("/movies")
+    @GetMapping("/dvdvideo")
     public BoekResponse getMovies() {
-        return bookService.getMovies(1);
+        return bookService.getDvdvideo(1);
     }
 
-    @GetMapping("/movies/page/{page}")
+    @GetMapping("/dvdvideo/page/{page}")
     public BoekResponse getMovies(@PathVariable int page) {
-        return bookService.getMovies(page);
+        return bookService.getDvdvideo(page);
     }
 
-    @GetMapping("/movies/{search_value}")
+    @GetMapping("/dvdvideo/{search_value}")
     public BoekResponse searchMovies(@PathVariable String search_value) {
-        return bookService.searchMovie(search_value, 1);
+        return bookService.searchDvdvideo(search_value, 1);
     }
 
-    @GetMapping("/movies/{search_value}/page/{page}")
+    @GetMapping("/dvdvideo/{search_value}/page/{page}")
     public BoekResponse searchMovies(@PathVariable String search_value, @PathVariable int page) {
-        return bookService.searchMovie(search_value, page);
+        return bookService.searchDvdvideo(search_value, page);
     }
 
     // NORMAL_BOOKS

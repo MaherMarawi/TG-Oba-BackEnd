@@ -147,7 +147,7 @@ public class BookService {
 
     // MOVIES
 
-    public BoekResponse getMovies(int page) {
+    public BoekResponse getDvdvideo(int page) {
         String key = "&refine=true&facet=type(movie)";
         String url = apiConfig.getUrl() +
                      "search/?q=special:all" +
@@ -157,7 +157,7 @@ public class BookService {
                      key;
         return sendResponse(url);
     }
-    public BoekResponse searchMovie(String search_value, int page) {
+    public BoekResponse searchDvdvideo(String search_value, int page) {
         String key = "&refine=true&facet=type(movie)";
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
