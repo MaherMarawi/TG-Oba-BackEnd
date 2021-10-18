@@ -3,6 +3,7 @@ package com.example.ObaProject.services;
 import com.example.ObaProject.api.GetRequest;
 import com.example.ObaProject.api.QueryArrange;
 import com.example.ObaProject.configuration.*;
+import com.example.ObaProject.data.Boek;
 import com.example.ObaProject.response.BoekResponse;
 import com.example.ObaProject.response.ComprehensiveBookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -21,7 +23,6 @@ public class BookService {
     private static GetRequest request;
     private static BoekConfig boekConfig;
     private static MetaConfig metaConfig;
-    private final String largetype = "largetype";
 
     @Autowired
     public BookService(ApiConfig apiConfig,
@@ -65,8 +66,64 @@ public class BookService {
         return fetchAllData(url);
     }
 
+    // LARGETYPE BOOKS
+
     public BoekResponse getLargetypeBooks(int page) {
         String key = "&refine=true&facet=type(largetype)";
+        String url = apiConfig.getUrl() +
+                     "search/?q=special:all" +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key ;
+        return sendResponse(url);
+    }
+    public BoekResponse searchLargetypeBook(String search_value, int page) {
+        String key = "&refine=true&facet=type(largetype)";
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                     "search/?q=" +
+                     query +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key;
+        return sendResponse(url);
+    }
+
+    // E_BOOKS
+
+    public BoekResponse getEBooks(int page) {
+        String key = "&refine=true&facet=type(ebook)";
+        String url = apiConfig.getUrl() +
+                     "search/?q=e-book" +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page;
+        BoekResponse ebooks = sendResponse(url);
+        List<Boek> books = ebooks.getBoeken().stream().filter(x -> x.getGenre().equals("ebook")).collect(Collectors.toList());
+        ebooks.setBoeken(books);
+        return ebooks;
+    }
+    public BoekResponse searchEBook(String search_value, int page) {
+        String key = "&refine=true&facet=type(ebook)";
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                     "search/?q=e-book%20" +
+                     query +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page;
+        BoekResponse ebooks = sendResponse(url);
+        List<Boek> books = ebooks.getBoeken().stream().filter(x -> x.getGenre().equals("ebook")).collect(Collectors.toList());
+        ebooks.setBoeken(books);
+        return ebooks;
+    }
+
+    // AUDIO_BOOKS
+
+    public BoekResponse getAudioBooks(int page) {
+        String key = "&refine=true&facet=type(audiobook)";
         String url = apiConfig.getUrl() +
                      "search/?q=special:all" +
                      apiConfig.getAuthorization() +
@@ -75,8 +132,58 @@ public class BookService {
                      key;
         return sendResponse(url);
     }
-    public BoekResponse searchLargetypeBook(String search_value, int page) {
-        String key = "&refine=true&facet=type(largetype)";
+    public BoekResponse searchAudioBooks(String search_value, int page) {
+        String key = "&refine=true&facet=type(audiobook)";
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                     "search/?q=" +
+                     query +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key;
+        return sendResponse(url);
+    }
+
+    // MOVIES
+
+    public BoekResponse getMovies(int page) {
+        String key = "&refine=true&facet=type(movie)";
+        String url = apiConfig.getUrl() +
+                     "search/?q=special:all" +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key;
+        return sendResponse(url);
+    }
+    public BoekResponse searchMovie(String search_value, int page) {
+        String key = "&refine=true&facet=type(movie)";
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String url = apiConfig.getUrl() +
+                     "search/?q=" +
+                     query +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key;
+        return sendResponse(url);
+    }
+
+    // MOVIES
+
+    public BoekResponse getNormalBooks(int page) {
+        String key = "&refine=true&facet=type(book)";
+        String url = apiConfig.getUrl() +
+                     "search/?q=special:all" +
+                     apiConfig.getAuthorization() +
+                     "&page=" +
+                     page +
+                     key;
+        return sendResponse(url);
+    }
+    public BoekResponse searchNormalBooks(String search_value, int page) {
+        String key = "&refine=true&facet=type(book)";
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
                      "search/?q=" +

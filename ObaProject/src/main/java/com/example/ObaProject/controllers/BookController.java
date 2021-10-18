@@ -41,6 +41,7 @@ public class BookController {
         return bookService.searchBook(search_value, page, "&refine=true");
     }
 
+    // LARGETYPE BOOKS
 
     @GetMapping("/largetype")
     public BoekResponse getLargetypeBooks() {
@@ -61,6 +62,96 @@ public class BookController {
     public BoekResponse searchLargetypeBook(@PathVariable String search_value, @PathVariable int page) {
         return bookService.searchLargetypeBook(search_value, page);
     }
+
+    // E_BOOKS
+
+    @GetMapping("/ebook")
+    public BoekResponse getEBooks() {
+        return bookService.getEBooks(1);
+    }
+
+    @GetMapping("/ebook/page/{page}")
+    public BoekResponse getEBooks(@PathVariable int page) {
+        return bookService.getEBooks(page);
+    }
+
+    @GetMapping("/ebook/{search_value}")
+    public BoekResponse searchEBook(@PathVariable String search_value) {
+        return bookService.searchEBook(search_value, 1);
+    }
+
+    @GetMapping("/ebook/{search_value}/page/{page}")
+    public BoekResponse searchEBook(@PathVariable String search_value, @PathVariable int page) {
+        return bookService.searchEBook(search_value, page);
+    }
+
+    // AUDIO_BOOKS
+
+    @GetMapping("/audiobook")
+    public BoekResponse getAudioBooks() {
+        return bookService.getAudioBooks(1);
+    }
+
+    @GetMapping("/audiobook/page/{page}")
+    public BoekResponse getAudioBooks(@PathVariable int page) {
+        return bookService.getAudioBooks(page);
+    }
+
+    @GetMapping("/audiobook/{search_value}")
+    public BoekResponse searchAudioBooks(@PathVariable String search_value) {
+        return bookService.searchAudioBooks(search_value, 1);
+    }
+
+    @GetMapping("/audiobook/{search_value}/page/{page}")
+    public BoekResponse searchAudioBooks(@PathVariable String search_value, @PathVariable int page) {
+        return bookService.searchAudioBooks(search_value, page);
+    }
+
+    // MOVIES
+
+    @GetMapping("/movies")
+    public BoekResponse getMovies() {
+        return bookService.getMovies(1);
+    }
+
+    @GetMapping("/movies/page/{page}")
+    public BoekResponse getMovies(@PathVariable int page) {
+        return bookService.getMovies(page);
+    }
+
+    @GetMapping("/movies/{search_value}")
+    public BoekResponse searchMovies(@PathVariable String search_value) {
+        return bookService.searchMovie(search_value, 1);
+    }
+
+    @GetMapping("/movies/{search_value}/page/{page}")
+    public BoekResponse searchMovies(@PathVariable String search_value, @PathVariable int page) {
+        return bookService.searchMovie(search_value, page);
+    }
+
+    // NORMAL_BOOKS
+
+    @GetMapping("/book")
+    public BoekResponse getNormalBooks() {
+        return bookService.getNormalBooks(1);
+    }
+
+    @GetMapping("/book/page/{page}")
+    public BoekResponse getNormalBooks(@PathVariable int page) {
+        return bookService.getNormalBooks(page);
+    }
+
+    @GetMapping("/book/{search_value}")
+    public BoekResponse searchNormalBooks(@PathVariable String search_value) {
+        return bookService.searchNormalBooks(search_value, 1);
+    }
+
+    @GetMapping("/book/{search_value}/page/{page}")
+    public BoekResponse searchNormalBooks(@PathVariable String search_value, @PathVariable int page) {
+        return bookService.searchNormalBooks(search_value, page);
+    }
+
+    // CATEGORIEEN
 
     @GetMapping("/categorieen")
     public List<String> getBooksCategories() {
