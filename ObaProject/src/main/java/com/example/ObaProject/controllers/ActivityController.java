@@ -31,6 +31,16 @@ public class ActivityController {
         return activityService.getActivities(page);
     }
 
+    @GetMapping("/random")
+    public ActiviteitResponse get20Activities() {
+        return activityService.get20Activities(1);
+    }
+
+    @GetMapping("/random/page/{page}")
+    public ActiviteitResponse get20Activities(@PathVariable int page) {
+        return activityService.get20Activities(page);
+    }
+
     @GetMapping("/{search_value}")
     public ComprehensiveActivityResponse searchActivity(@PathVariable String search_value) {
         return activityService.searchActivity(search_value, 1);
