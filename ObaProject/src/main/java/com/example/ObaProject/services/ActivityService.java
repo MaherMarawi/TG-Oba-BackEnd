@@ -66,14 +66,9 @@ public class ActivityService {
                 "&page=" +
                 page;
         ActiviteitResponse res = sendResponse(url);
-        HashSet<Activiteit> hset = new HashSet<Activiteit>();
-
         List<Activiteit> act = new ArrayList<>();
-
         Set<String> set = new HashSet<String>();
         res.getActiviteiten().stream().forEach(x -> set.add(x.getTitle()));
-
-
         List<String> ll = new ArrayList<String>(set);
         for (int i = 0; i < set.size(); i++) {
             int finalI = i;
@@ -97,6 +92,18 @@ public class ActivityService {
                 page ;
         return sendResponse(url);
     }
+
+    public ActiviteitResponse getActivityWithDate(String datum, int page) {
+        String key = "&facet=Activiteiten(" + datum + ")";
+        String url = apiConfig.getUrl() +
+                "search/?q=table:activiteiten" +
+                apiConfig.getAuthorization() +
+                "&page=" +
+                page +
+                key;
+        return sendResponse(url);
+    }
+
 
     public ComprehensiveActivityResponse getActivitiesInLocation(String wijk_naam, int page) {
         String url = apiConfig.getUrl() +

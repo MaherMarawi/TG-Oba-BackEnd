@@ -67,6 +67,16 @@ public class ActivityController {
         return activityService.zoekActivity(search_value, page);
     }
 
+    @GetMapping("/datum/{datum}")
+    public ActiviteitResponse getActivityWithDate(@PathVariable String datum) {
+        return activityService.getActivityWithDate(datum, 1);
+    }
+
+    @GetMapping("/datum/{datum}/page/{page}")
+    public ActiviteitResponse getActivityWithDate(@PathVariable String datum, @PathVariable int page) {
+        return activityService.getActivityWithDate(datum, page);
+    }
+
     @GetMapping("/wijk/{wijk_naam}")
     public ComprehensiveActivityResponse getActivitiesInLocation(@PathVariable String wijk_naam) {
         return activityService.getActivitiesInLocation(wijk_naam, 1);
