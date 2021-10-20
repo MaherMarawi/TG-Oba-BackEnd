@@ -61,7 +61,7 @@ public class ActiviteitConfig {
         iB = strTijd.indexOf('T');
         iE = strTijd.indexOf('Z');
         String endTijd = strTijd.substring(iB + 1, iE);
-        return startTijd + " - " + endTijd;
+        return startTijd.substring(0, startTijd.length() - 3) + " - " + endTijd.substring(0, startTijd.length() - 3);
     }
 
     public static String getDate(Element e) {
