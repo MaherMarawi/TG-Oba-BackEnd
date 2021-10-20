@@ -3,8 +3,8 @@ package com.example.ObaProject.data;
 public class Activiteit extends Result {
 
     private String doelgroep;
-    private String begin;
-    private String einde;
+    private String tijd;
+    private String datum;
     private String jaar;
 
 
@@ -15,11 +15,11 @@ public class Activiteit extends Result {
     public String getDoelgroep() {
         return doelgroep;
     }
-    public String getBegin() {
-        return begin;
+    public String getTijd() {
+        return tijd;
     }
-    public String getEinde() {
-        return einde;
+    public String getDatum() {
+        return datum;
     }
     public String getJaar() {
         return jaar;
@@ -28,11 +28,11 @@ public class Activiteit extends Result {
     public void setDoelgroep(String doelgroep) {
         this.doelgroep = doelgroep;
     }
-    public void setBegin(String begin) {
-        this.begin = begin;
+    public void setTijd(String tijd) {
+        this.tijd = tijd;
     }
-    public void setEinde(String einde) {
-        this.einde = einde;
+    public void setDatum(String datum) {
+        this.datum = datum;
     }
     public void setJaar(String jaar) {
         this.jaar = jaar;

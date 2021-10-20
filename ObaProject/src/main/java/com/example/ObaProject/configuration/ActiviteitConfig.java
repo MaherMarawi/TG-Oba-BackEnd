@@ -38,8 +38,8 @@ public class ActiviteitConfig {
         activiteit.setOmslagafbeeldingen(checkValue(eElement, "coverimages") ? eElement.getElementsByTagName("coverimages").item(0).getTextContent() : "");
         activiteit.setDoelgroep(checkValue(eElement, "target-audience") ? eElement.getElementsByTagName("target-audience").item(0).getTextContent() : "");
         activiteit.setLocatie(checkValue(eElement, "activity-location") ? eElement.getElementsByTagName("activity-location").item(0).getTextContent() : "");
-        activiteit.setBegin(checkValue(eElement, "activity-start") ? eElement.getElementsByTagName("activity-start").item(0).getTextContent() : "");
-        activiteit.setEinde(checkValue(eElement, "activity-end") ? eElement.getElementsByTagName("activity-end").item(0).getTextContent() : "");
+        activiteit.setTijd(getTime(eElement));
+        activiteit.setDatum(getDate(eElement));
         return activiteit;
     }
     public static boolean checkValue(Element e, String attr) {
@@ -50,5 +50,29 @@ public class ActiviteitConfig {
         NodeList n = checkValue(e, "id") ? e.getElementsByTagName("id") : null;
         Element eE = (Element) n.item(0);
         return eE.getAttribute("nativeid");
+    }
+
+    public static String getTime(Element e) {
+        String strTijd = checkValue(e, "activity-start") ? e.getElementsByTagName("activity-start").item(0).getTextContent() : "";
+        int iB = strTijd.indexOf('T');
+        int iE = strTijd.indexOf('Z');
+        String startTijd = strTijd.substring(iB + 1, iE);
+        strTijd = checkValue(e, "activity-end") ? e.getElementsByTagName("activity-end").item(0).getTextContent() : "";
+        iB = strTijd.indexOf('T');
+        iE = strTijd.indexOf('Z');
+        String endTijd = strTijd.substring(iB + 1, iE);
+        return startTijd + " - " + endTijd;
+    }
+
+    public static String getDate(Element e) {
+        String strTijd = checkValue(e, "activity-start") ? e.getElementsByTagName("activity-start").item(0).getTextContent() : "";
+        int iB = strTijd.indexOf('T');
+        int iE = strTijd.indexOf('Z');
+        String startTijd = strTijd.substring(0, iB);
+        strTijd = checkValue(e, "activity-end") ? e.getElementsByTagName("activity-end").item(0).getTextContent() : "";
+        iB = strTijd.indexOf('T');
+        iE = strTijd.indexOf('Z');
+        String endTijd = strTijd.substring(0, iB);
+        return startTijd;
     }
 }
