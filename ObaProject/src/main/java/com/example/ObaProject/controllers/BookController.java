@@ -31,6 +31,16 @@ public class BookController {
         return bookService.getBooks("&refine=true", page);
     }
 
+    @GetMapping("/random")
+    public BoekResponse getRandomBooks() {
+        return bookService.getRandomBooks(1);
+    }
+
+    @GetMapping("random/page/{page}")
+    public BoekResponse getRandomBooks(@PathVariable int page) {
+        return bookService.getRandomBooks(page);
+    }
+
     @GetMapping("/{search_value}")
     public ComprehensiveBookResponse searchBook(@PathVariable String search_value) {
         return bookService.searchBook(search_value, 1, "&refine=true");

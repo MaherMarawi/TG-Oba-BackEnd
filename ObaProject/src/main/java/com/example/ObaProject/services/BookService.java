@@ -78,6 +78,15 @@ public class BookService {
         return sendResponse(url);
     }
 
+    public BoekResponse getRandomBooks(int page) {
+        String url = apiConfig.getUrl() +
+                "search/?q=special:all" +
+                apiConfig.getAuthorization() +
+                "&page=" +
+                page ;
+        return sendResponse(url);
+    }
+
     // LARGETYPE BOOKS
 
     public BoekResponse getLargetypeBooks(int page) {
