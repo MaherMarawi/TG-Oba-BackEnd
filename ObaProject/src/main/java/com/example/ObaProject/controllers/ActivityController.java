@@ -1,5 +1,6 @@
 package com.example.ObaProject.controllers;
 
+import com.example.ObaProject.data.Activiteit;
 import com.example.ObaProject.response.ActiviteitResponse;
 import com.example.ObaProject.response.BoekResponse;
 import com.example.ObaProject.response.ComprehensiveActivityResponse;
@@ -9,6 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @RestController
 @RequestMapping("api/oba/techgrounds/activiteiten")

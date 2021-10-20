@@ -3,12 +3,16 @@ package com.example.ObaProject.services;
 import com.example.ObaProject.api.GetRequest;
 import com.example.ObaProject.api.QueryArrange;
 import com.example.ObaProject.configuration.*;
+import com.example.ObaProject.data.Activiteit;
 import com.example.ObaProject.response.ActiviteitResponse;
 import com.example.ObaProject.response.BoekResponse;
 import com.example.ObaProject.response.ComprehensiveActivityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ActivityService {
@@ -61,7 +65,26 @@ public class ActivityService {
                 "&refine=true"+
                 "&page=" +
                 page;
-        return sendResponse(url);
+        ActiviteitResponse res = sendResponse(url);
+        HashSet<Activiteit> hset = new HashSet<Activiteit>();
+
+        List<Activiteit> act = new ArrayList<>();
+
+        Set<String> set = new HashSet<String>();
+        res.getActiviteiten().stream().forEach(x -> set.add(x.getTitle()));
+
+
+        List<String> ll = new ArrayList<String>(set);
+        for (int i = 0; i < set.size(); i++) {
+            int finalI = i;
+            act.add(res.getActiviteiten()
+                    .stream()
+                    .filter(x -> x.getTitle().equals(ll.get(finalI)))
+                    .findFirst()
+                    .get());
+        }
+        res.setActiviteiten(act);
+        return res;
     }
 
     public ActiviteitResponse zoekActivity(String search_value, int page) {
