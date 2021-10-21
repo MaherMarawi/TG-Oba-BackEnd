@@ -93,6 +93,19 @@ public class ActivityService {
         return sendResponse(url);
     }
 
+    public ActiviteitResponse searchActivityWithDate(String search_value, String datum, int page) {
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String key = "&facet=Activiteiten(" + datum + ")";
+        String url = apiConfig.getUrl() +
+                "search/?q=table:activiteiten%20" +
+                query +
+                apiConfig.getAuthorization() +
+                "&page=" +
+                page +
+                key;
+        return sendResponse(url);
+    }
+
     public ActiviteitResponse getActivityWithDate(String datum, int page) {
         String key = "&facet=Activiteiten(" + datum + ")";
         String url = apiConfig.getUrl() +
@@ -103,6 +116,8 @@ public class ActivityService {
                 key;
         return sendResponse(url);
     }
+
+
 
 
     public ComprehensiveActivityResponse getActivitiesInLocation(String wijk_naam, int page) {

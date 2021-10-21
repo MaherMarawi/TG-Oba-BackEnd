@@ -77,6 +77,16 @@ public class ActivityController {
         return activityService.getActivityWithDate(datum, page);
     }
 
+    @GetMapping("/zoek/{search_value}/datum/{datum}")
+    public ActiviteitResponse searchActivityWithDate(@PathVariable String search_value, @PathVariable String datum) {
+        return activityService.searchActivityWithDate(search_value, datum, 1);
+    }
+
+    @GetMapping("/zoek/{search_value}/datum/{datum}page/{page}")
+    public ActiviteitResponse searchActivityWithDate(@PathVariable String search_value, @PathVariable String datum, @PathVariable int page) {
+        return activityService.searchActivityWithDate(search_value, datum, page);
+    }
+
     @GetMapping("/wijk/{wijk_naam}")
     public ComprehensiveActivityResponse getActivitiesInLocation(@PathVariable String wijk_naam) {
         return activityService.getActivitiesInLocation(wijk_naam, 1);
