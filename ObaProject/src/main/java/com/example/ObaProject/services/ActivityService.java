@@ -97,9 +97,10 @@ public class ActivityService {
         StringBuilder query = queryArrange.getQuery(search_value);
         String key = "&facet=Activiteiten(" + datum + ")";
         String url = apiConfig.getUrl() +
-                "search/?q=table:activiteiten%20" +
+                "search/?q=table:Activiteiten%20" +
                 query +
                 apiConfig.getAuthorization() +
+                "&refine=true" +
                 "&page=" +
                 page +
                 key;
