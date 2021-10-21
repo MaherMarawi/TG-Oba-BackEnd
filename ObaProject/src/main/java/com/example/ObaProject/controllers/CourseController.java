@@ -30,6 +30,27 @@ public class CourseController {
         return courseService.getCourses(page);
     }
 
+    @GetMapping("/random")
+    public CursusResponse getRandomCourses() {
+        return courseService.getRandomCourses(1);
+    }
+
+    @GetMapping("/random/page/{page}")
+    public CursusResponse getRandomCourses(@PathVariable int page) {
+        return courseService.getRandomCourses(page);
+    }
+
+    @GetMapping("/random/datum/{datum}")
+    public CursusResponse getRandomCoursesWithDate(@PathVariable String datum) {
+        return courseService.getRandomCoursesWithDate(datum, 1);
+    }
+
+    @GetMapping("/random/datum/{datum}/page/{page}")
+    public CursusResponse getRandomCoursesWithDate(@PathVariable String datum, @PathVariable int page) {
+        return courseService.getRandomCoursesWithDate(datum, page);
+    }
+
+
     @GetMapping("/{search_value}")
     public ComprehensiveCursusResponse searchCourse(@PathVariable String search_value) {
         return courseService.searchCourse(search_value, 1);
@@ -48,5 +69,15 @@ public class CourseController {
     @GetMapping("/zoek/{search_value}/page/{page}")
     public CursusResponse zoekCourse(@PathVariable String search_value, @PathVariable int page) {
         return courseService.zoekCourse(search_value, page);
+    }
+
+    @GetMapping("/zoek/{search_value}/datum/{datum}")
+    public CursusResponse searchCourseWithDate(@PathVariable String search_value, @PathVariable String datum) {
+        return courseService.searchCourseWithDate(search_value, datum, 1);
+    }
+
+    @GetMapping("/zoek/{search_value}/datum/{datum}/page/{page}")
+    public CursusResponse searchCourseWithDate(@PathVariable String search_value, @PathVariable String datum, @PathVariable int page) {
+        return courseService.searchCourseWithDate(search_value, datum, page);
     }
 }

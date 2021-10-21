@@ -43,6 +43,30 @@ public class CourseService {
         return fetchAllData(url);
     }
 
+    public CursusResponse getRandomCourses(int page) {
+        String url = apiConfig.getUrl() +
+                "search/?q=table:jsonsrc" +
+                apiConfig.getAuthorization() +
+                "&refine=true" +
+                apiConfig.getSort() +
+                "&page=" +
+                page;
+        return sendResponse(url);
+    }
+    public CursusResponse getRandomCoursesWithDate(String datum, int page) {
+        String key = "&facet=Activiteiten(" + datum + ")";
+        String url = apiConfig.getUrl() +
+                "search/?q=table:jsonsrc" +
+                apiConfig.getAuthorization() +
+                "&refine=true" +
+                apiConfig.getSort() +
+                "&page=" +
+                page +
+                key;
+        return sendResponse(url);
+    }
+
+
     public ComprehensiveCursusResponse searchCourse(String search_value, int page) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
@@ -66,6 +90,20 @@ public class CourseService {
                 page;
         return sendResponse(url);
     }
+
+    public CursusResponse searchCourseWithDate(String search_value, String datum, int page) {
+        StringBuilder query = queryArrange.getQuery(search_value);
+        String key = "&facet=Activiteiten(" + datum + ")";
+        String url = apiConfig.getUrl() +
+                "search/?q=table:jsonsrc%20" +
+                query +
+                apiConfig.getAuthorization() +
+                "&refine=true" +
+                "&page=" +
+                page +
+                key;
+        return sendResponse(url);
+    }
     public static ComprehensiveCursusResponse fetchAllData(String url) {
         return new ComprehensiveCursusResponse(
                 sendResponse(url + "&facet=Activiteiten(c_thisweek)"),
@@ -82,4 +120,7 @@ public class CourseService {
         response.setMeta(metaConfig.resultsToJson(doc.getElementsByTagName("meta")));
         return response;
     }
+
+
+
 }
