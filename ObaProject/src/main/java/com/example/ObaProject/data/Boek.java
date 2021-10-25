@@ -13,6 +13,15 @@ public class Boek extends Result {
     private String[] topical_subjects;
     private String subtitle;
     private String[] collaborators;
+    private String boek_genre;
+
+    public String getBoek_genre() {
+        return boek_genre;
+    }
+
+    public void setBoek_genre(String boek_genre) {
+        this.boek_genre = boek_genre;
+    }
 
     public Boek() {
     }

@@ -45,6 +45,7 @@ public class BoekConfig {
         boek.setAuteurs(checkValue(eElement, "main-author") ? eElement.getElementsByTagName("main-author").item(0).getTextContent() : "");
         boek.setTopical_subjects(checkValue(eElement, "subjects") ? eElement.getElementsByTagName("subjects").item(0).getTextContent() : "");
         boek.setCollaborators(checkValue(eElement, "author") ? eElement.getElementsByTagName("author").item(0).getTextContent() : "");
+        boek.setBoek_genre(checkValue(eElement, "genre") ? eElement.getElementsByTagName("genre").item(0).getTextContent() : "");
         return boek;
     }
     public static boolean checkValue(Element e, String attr) {

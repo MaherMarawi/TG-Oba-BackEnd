@@ -35,6 +35,7 @@ public class ActivityService {
         this.activiteitConfig = activiteitConfig;
         this.metaConfig = metaConfig;
     }
+
     public ComprehensiveActivityResponse getActivities(int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=table:activiteiten" +
@@ -46,6 +47,7 @@ public class ActivityService {
         return fetchAllData(url);
 
     }
+
     public ComprehensiveActivityResponse searchActivity(String search_value, int page) {
         StringBuilder query = queryArrange.getQuery(search_value);
         String url = apiConfig.getUrl() +
@@ -118,9 +120,6 @@ public class ActivityService {
         return sendResponse(url);
     }
 
-
-
-
     public ComprehensiveActivityResponse getActivitiesInLocation(String wijk_naam, int page) {
         String url = apiConfig.getUrl() +
                      "search/?q=table:activiteiten" +
@@ -151,6 +150,4 @@ public class ActivityService {
         response.setMeta(metaConfig.resultsToJson(doc.getElementsByTagName("meta")));
         return response;
     }
-
-
 }
